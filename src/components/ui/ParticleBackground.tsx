@@ -43,7 +43,7 @@ export default function ParticleBackground() {
     };
 
     const initParticles = () => {
-      const count = Math.min(Math.floor((canvas.width * canvas.height) / 12000), 100);
+      const count = Math.min(Math.floor((canvas.width * canvas.height) / 20000), 60);
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
