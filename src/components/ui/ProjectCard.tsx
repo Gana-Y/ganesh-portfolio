@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, Tag } from 'lucide-react';
 import { Project } from '@/types';
@@ -19,6 +20,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const { ref, handleMouseMove, handleMouseLeave } = useTilt(8);
+  const [imgError, setImgError] = useState(false);
 
   return (
     <motion.div
@@ -35,42 +37,57 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         style={{ transformStyle: 'preserve-3d', transition: 'transform 0.3s ease, box-shadow 0.3s ease' }}
       >
         {/* Card image / gradient header */}
-        <div className="relative h-48 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/30 via-electric-blue/20 to-transparent" />
+        <div className="relative h-48 overflow-hidden bg-abyss/80">
+          {project.imageUrl && !imgError ? (
+            <div className="relative w-full h-full overflow-hidden">
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                onError={() => setImgError(true)}
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-surface via-dark-surface/40 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-neon-purple/10 mix-blend-overlay pointer-events-none" />
+            </div>
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-gradient-to-br from-neon-purple/30 via-electric-blue/20 to-transparent" />
 
-          {/* Neural net pattern - fixed coordinates (no Math.random) */}
-          <div className="absolute inset-0 opacity-30">
-            <svg width="100%" height="100%" viewBox="0 0 400 200">
-              <line x1="20"  y1="30"  x2="150" y2="80"  stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
-              <line x1="150" y1="80"  x2="280" y2="40"  stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
-              <line x1="280" y1="40"  x2="370" y2="130" stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
-              <line x1="150" y1="80"  x2="200" y2="160" stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
-              <line x1="200" y1="160" x2="320" y2="170" stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
-              <line x1="80"  y1="150" x2="200" y2="160" stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
-              <circle cx="20"  cy="30"  r="3" fill="#a78bfa" opacity="0.6" />
-              <circle cx="150" cy="80"  r="3" fill="#a78bfa" opacity="0.6" />
-              <circle cx="280" cy="40"  r="3" fill="#a78bfa" opacity="0.6" />
-              <circle cx="370" cy="130" r="3" fill="#a78bfa" opacity="0.6" />
-              <circle cx="200" cy="160" r="3" fill="#a78bfa" opacity="0.6" />
-              <circle cx="80"  cy="150" r="3" fill="#a78bfa" opacity="0.6" />
-              <circle cx="320" cy="170" r="3" fill="#a78bfa" opacity="0.6" />
-              <circle cx="100" cy="60"  r="3" fill="#a78bfa" opacity="0.6" />
-            </svg>
-          </div>
+              {/* Neural net pattern - fixed coordinates (no Math.random) */}
+              <div className="absolute inset-0 opacity-30">
+                <svg width="100%" height="100%" viewBox="0 0 400 200">
+                  <line x1="20"  y1="30"  x2="150" y2="80"  stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
+                  <line x1="150" y1="80"  x2="280" y2="40"  stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
+                  <line x1="280" y1="40"  x2="370" y2="130" stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
+                  <line x1="150" y1="80"  x2="200" y2="160" stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
+                  <line x1="200" y1="160" x2="320" y2="170" stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
+                  <line x1="80"  y1="150" x2="200" y2="160" stroke="#7c3aed" strokeOpacity="0.4" strokeWidth="0.5" />
+                  <circle cx="20"  cy="30"  r="3" fill="#a78bfa" opacity="0.6" />
+                  <circle cx="150" cy="80"  r="3" fill="#a78bfa" opacity="0.6" />
+                  <circle cx="280" cy="40"  r="3" fill="#a78bfa" opacity="0.6" />
+                  <circle cx="370" cy="130" r="3" fill="#a78bfa" opacity="0.6" />
+                  <circle cx="200" cy="160" r="3" fill="#a78bfa" opacity="0.6" />
+                  <circle cx="80"  cy="150" r="3" fill="#a78bfa" opacity="0.6" />
+                  <circle cx="320" cy="170" r="3" fill="#a78bfa" opacity="0.6" />
+                  <circle cx="100" cy="60"  r="3" fill="#a78bfa" opacity="0.6" />
+                </svg>
+              </div>
+            </>
+          )}
 
           {/* Project number */}
-          <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-black/40 border border-neon-purple/30 flex items-center justify-center text-xs font-mono text-neon-bright">
+          <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-neon-purple/30 flex items-center justify-center text-xs font-mono text-neon-bright z-10">
             {String(index + 1).padStart(2, '0')}
           </div>
 
           {/* Status badge */}
-          <div className={`absolute top-4 right-4 px-2.5 py-1 rounded-full text-xs font-mono border ${STATUS_COLORS[project.status]}`}>
+          <div className={`absolute top-4 right-4 px-2.5 py-1 rounded-full text-xs font-mono border backdrop-blur-md z-10 ${STATUS_COLORS[project.status]}`}>
             {project.status}
           </div>
 
           {/* Featured badge */}
           {project.featured && (
-            <div className="absolute bottom-4 left-4 px-2.5 py-1 rounded-full text-xs font-mono bg-neon-purple/20 border border-neon-purple/40 text-neon-bright">
+            <div className="absolute bottom-4 left-4 px-2.5 py-1 rounded-full text-xs font-mono bg-neon-purple/40 backdrop-blur-md border border-neon-purple/50 text-neon-bright z-10">
               ★ Featured
             </div>
           )}

@@ -52,6 +52,19 @@ export const SKILL_CATEGORIES = ['All', 'Languages', 'AI/ML', 'Backend', 'Databa
 export const PROJECTS: Project[] = [
   {
     id: '1',
+    title: 'Florix AI — Intelligent Academic Study Platform',
+    description:
+      'Production-grade AI learning and study orchestration platform. Features true in-database RAG with Google Gemini, SuperMemo-2 (SM-2) adaptive spaced repetition, simulated voice-driven AI viva oral examinations with rubric grading, cognitive mistake analytics, and multimodal ingestion across PDFs, YouTube lectures, and voice notes.',
+    techStack: ['Python', 'FastAPI', 'React 19', 'Gemini 2.5', 'Tailwind CSS', 'Docker', 'SQLite WAL'],
+    githubUrl: 'https://github.com/Gana-Y/Florix_AI',
+    liveUrl: 'https://florix-4rkmoj877-ganesh-y-s-projects.vercel.app',
+    imageUrl: '/images/florix-ai.png',
+    tags: ['Multimodal RAG', 'Adaptive Learning (SM-2)', 'AI Viva Exam', 'Full-Stack AI'],
+    featured: true,
+    status: 'Complete',
+  },
+  {
+    id: '2',
     title: 'MedAI Diagnosis Assistant',
     description:
       'An AI-powered medical diagnosis assistant leveraging large language models and computer vision to analyze symptoms and medical imaging. Integrates RAG pipeline for evidence-based recommendations.',
@@ -64,7 +77,7 @@ export const PROJECTS: Project[] = [
     status: 'In Progress',
   },
   {
-    id: '2',
+    id: '3',
     title: 'FinSight — Market Intelligence',
     description:
       'Real-time financial market analysis tool using NLP to parse earnings calls, news sentiment, and SEC filings. Generates AI-driven investment insights with explainable predictions.',
@@ -77,7 +90,7 @@ export const PROJECTS: Project[] = [
     status: 'Building',
   },
   {
-    id: '3',
+    id: '4',
     title: 'Neural Document Q&A System',
     description:
       'A RAG-based document intelligence system that ingests PDFs, research papers, and knowledge bases, enabling semantic search and conversational querying with citation tracking.',
@@ -90,7 +103,7 @@ export const PROJECTS: Project[] = [
     status: 'Planned',
   },
   {
-    id: '4',
+    id: '5',
     title: 'DeepVision — Object Detection',
     description:
       'Real-time multi-class object detection system trained on custom medical imaging datasets using YOLOv9. Achieves 94% mAP for clinical anomaly detection.',

@@ -21,11 +21,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Ganesh Y', url: 'https://github.com/Gana-Y' }],
   creator: 'Ganesh Y',
-  metadataBase: new URL('https://ganesh-y.vercel.app'),
+  metadataBase: new URL('https://ganesh-portfolio-silk-five.vercel.app'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://ganesh-y.vercel.app',
+    url: 'https://ganesh-portfolio-silk-five.vercel.app',
     title: 'Ganesh Y — AI Engineer',
     description:
       'Aspiring AI/ML Engineer building next-generation intelligent systems in healthcare and finance.',
