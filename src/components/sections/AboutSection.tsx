@@ -123,9 +123,9 @@ export default function AboutSection() {
 
               {/* Name + title */}
               <div>
-                <h3 className="font-display font-bold text-text-primary text-xl">Ganesh Y</h3>
-                <p className="text-neon-bright text-sm font-mono mt-0.5">AI Engineer</p>
-                <p className="text-text-ghost text-xs font-mono mt-1">📍 India</p>
+                <h3 className="font-display font-bold text-text-primary text-xl">Ganesh Yandigeri</h3>
+                <p className="text-neon-bright text-sm font-mono mt-0.5">Python &amp; AI Systems Engineer</p>
+                <p className="text-text-ghost text-xs font-mono mt-1">📍 Bangalore, India</p>
                 <div className="flex items-center gap-1.5 mt-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                   <span className="text-xs font-mono text-green-400">Open to opportunities</span>
