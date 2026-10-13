@@ -137,7 +137,7 @@ export default function GitHubSection() {
               <motion.div
                 key={stat.label}
                 variants={fadeInUp}
-                className="glass-card rounded-2xl p-6 text-center border border-neon-purple/20 hover:border-neon-purple/40 transition-all group"
+                className="glass-hud glass-hud-hover rounded-2xl p-6 text-center border border-white/10 hover:border-electric-cyan/40 transition-all group"
               >
                 <stat.icon className={`w-6 h-6 ${stat.color} mx-auto mb-3 group-hover:scale-110 transition-transform`} />
                 <div className="text-3xl font-display font-bold gradient-text mb-1">
@@ -151,7 +151,7 @@ export default function GitHubSection() {
           {/* Language breakdown */}
           <motion.div
             variants={fadeInUp}
-            className="glass-card rounded-2xl p-8 border border-neon-purple/20"
+            className="glass-hud rounded-2xl p-8 border border-white/10 shadow-xl"
           >
             <h3 className="font-display font-semibold text-text-primary mb-6 flex items-center gap-2">
               <Code2 className="w-5 h-5 text-neon-bright" />

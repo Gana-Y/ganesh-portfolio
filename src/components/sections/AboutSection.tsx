@@ -89,7 +89,7 @@ export default function AboutSection() {
             className="space-y-6"
           >
             {/* Profile card */}
-            <div className="flex items-center gap-5 glass-card rounded-2xl p-5 border border-neon-purple/20">
+            <div className="flex items-center gap-5 glass-hud rounded-2xl p-5 border border-white/15">
               {/* Photo with glowing ring */}
               <div className="relative flex-shrink-0">
                 {/* Spinning gradient ring */}
@@ -188,7 +188,7 @@ export default function AboutSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={statsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="glass-card rounded-2xl p-6 text-center border border-neon-purple/20 hover:border-neon-purple/40 transition-all group"
+                className="glass-hud glass-hud-hover rounded-2xl p-6 text-center border border-white/10 hover:border-electric-cyan/40 transition-all group"
               >
                 <div className="text-3xl md:text-4xl font-display font-bold gradient-text mb-2">
                   {stat.value}
@@ -198,16 +198,16 @@ export default function AboutSection() {
             ))}
 
             {/* Current focus */}
-            <div className="col-span-2 glass-card rounded-2xl p-6 border border-neon-purple/20">
+            <div className="col-span-2 glass-hud rounded-2xl p-6 border border-white/10">
               <div className="flex items-center gap-2 mb-3">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-xs font-mono text-text-muted uppercase tracking-wider">Currently Learning</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {['Agentic AI', 'RAG Pipelines', 'Model Fine-tuning', 'MLOps', 'Vector Databases'].map((item) => (
                   <span
                     key={item}
-                    className="px-3 py-1 text-xs font-mono rounded-full bg-neon-purple/10 border border-neon-purple/25 text-neon-electric"
+                    className="px-3 py-1 text-xs font-mono rounded-full bg-electric-cyan/10 border border-electric-cyan/20 text-electric-cyan"
                   >
                     {item}
                   </span>
@@ -230,7 +230,7 @@ export default function AboutSection() {
               key={card.title}
               variants={fadeInUp}
               custom={i}
-              className={`glass-card rounded-2xl p-6 bg-gradient-to-br ${card.color} border ${card.border} hover:scale-[1.02] hover:shadow-neon-sm transition-all duration-300 group`}
+              className={`glass-hud glass-hud-hover rounded-2xl p-6 bg-gradient-to-br ${card.color} border border-white/10 hover:border-white/25 hover:scale-[1.02] transition-all duration-300 group`}
             >
               <div className={`w-10 h-10 rounded-xl bg-black/30 flex items-center justify-center mb-4 ${card.iconColor} group-hover:scale-110 transition-transform`}>
                 <card.icon className="w-5 h-5" />

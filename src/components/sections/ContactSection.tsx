@@ -132,7 +132,7 @@ export default function ContactSection() {
                   href={item.href}
                   target={item.href.startsWith('http') ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl glass-card border border-neon-purple/15 hover:border-neon-purple/35 transition-all group"
+                  className="flex items-center gap-4 p-4 rounded-xl glass-hud glass-hud-hover border border-white/10 hover:border-electric-cyan/40 transition-all group"
                   whileHover={{ x: 4 }}
                 >
                   <div className={`w-10 h-10 rounded-xl bg-black/30 flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
@@ -158,7 +158,7 @@ export default function ContactSection() {
           >
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="glass-card rounded-2xl p-8 border border-neon-purple/20 space-y-5"
+              className="glass-hud rounded-2xl p-8 border border-white/10 space-y-5 shadow-xl"
             >
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>

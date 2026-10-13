@@ -76,7 +76,7 @@ export default function CertificationsSection() {
             <motion.div
               key={cert.id}
               variants={fadeInUp}
-              className={`glass-card rounded-2xl p-6 border ${cert.border} bg-gradient-to-br ${cert.color} hover:shadow-neon-sm transition-all group`}
+              className={`glass-hud glass-hud-hover rounded-2xl p-6 border border-white/10 hover:border-white/25 bg-gradient-to-br ${cert.color} transition-all group`}
             >
               <div className="w-14 h-14 rounded-2xl bg-black/30 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
                 {cert.icon}

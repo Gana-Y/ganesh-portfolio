@@ -15,7 +15,7 @@ function SkillBar({ name, level, icon, color }: { name: string; level: number; i
     <motion.div
       ref={ref}
       variants={skillCardVariants}
-      className="glass-card rounded-xl p-4 hover:border-neon-purple/40 transition-all group border border-neon-purple/15"
+      className="glass-hud glass-hud-hover rounded-xl p-4 transition-all group border border-white/10 hover:border-electric-cyan/40"
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">

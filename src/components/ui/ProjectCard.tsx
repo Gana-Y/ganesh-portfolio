@@ -33,9 +33,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="glass-card rounded-2xl overflow-hidden border border-neon-purple/20 hover:border-neon-purple/40 transition-all duration-300 group h-full flex flex-col"
+        className="glass-hud glass-hud-hover rounded-2xl overflow-hidden border border-white/10 hover:border-electric-cyan/40 transition-all duration-300 group h-full flex flex-col shadow-lg"
         style={{ transformStyle: 'preserve-3d', transition: 'transform 0.3s ease, box-shadow 0.3s ease' }}
       >
+        {/* Specular glass reflection layer */}
+        <div className="absolute inset-0 specular-sheen pointer-events-none" />
         {/* Card image / gradient header */}
         <div className="relative h-48 overflow-hidden bg-abyss/80">
           {project.imageUrl && !imgError ? (
@@ -107,7 +109,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="flex items-center gap-1 px-2 py-0.5 text-xs font-mono rounded-md bg-neon-purple/10 text-neon-electric border border-neon-purple/20"
+                className="flex items-center gap-1 px-2.5 py-0.5 text-xs font-mono rounded-full bg-electric-cyan/10 text-electric-cyan border border-electric-cyan/25"
               >
                 <Tag className="w-2.5 h-2.5" />
                 {tag}
@@ -120,7 +122,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-2 py-0.5 text-xs font-mono rounded bg-white/5 text-text-muted border border-white/10"
+                className="px-2.5 py-0.5 text-xs font-mono rounded-full bg-white/5 text-text-muted border border-white/10"
               >
                 {tech}
               </span>

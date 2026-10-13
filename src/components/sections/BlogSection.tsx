@@ -40,7 +40,7 @@ export default function BlogSection() {
               <motion.article
                 key={post.id}
                 variants={fadeInUp}
-                className="glass-card rounded-2xl overflow-hidden border border-neon-purple/20 hover:border-neon-purple/40 transition-all group hover:shadow-neon-sm cursor-pointer"
+                className="glass-hud glass-hud-hover rounded-2xl overflow-hidden border border-white/10 hover:border-electric-cyan/40 transition-all group cursor-pointer"
                 whileHover={{ y: -6 }}
                 onClick={() => window.open((post as any).url, '_blank')}
               >
