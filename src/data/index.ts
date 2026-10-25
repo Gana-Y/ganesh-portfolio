@@ -2,11 +2,10 @@ import { Project, Skill, Certification, NavLink, SocialLink } from '@/types';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
+  { label: 'Singularity', href: '#singularity' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
   { label: 'Certifications', href: '#certifications' },
-  { label: 'GitHub', href: '#github' },
-  { label: 'Blog', href: '#blog' },
   { label: 'Contact', href: '#contact' },
 ];
 

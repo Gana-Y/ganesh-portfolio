@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Compass, Sparkles, Orbit, Award, Code2, Heart, TrendingUp, ShieldCheck } from 'lucide-react';
-import CosmicRing from '@/components/ui/CosmicRing';
+import { Sparkles, Orbit, Code2, Heart, TrendingUp, ShieldCheck, Terminal, MapPin } from 'lucide-react';
 import { PERSONAL_INFO } from '@/data';
 
 const ORBITING_PILLARS = [
@@ -55,7 +54,7 @@ export default function SpaceAbout() {
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full cosmic-pill mb-4 text-xs font-mono text-stellar-cyan">
             <Orbit className="w-3.5 h-3.5 text-stellar-cyan animate-spin-slow" />
-            <span>SECTOR_02 // THE VOID PORTAL</span>
+            <span>SECTOR_02 // THE ARCHITECT &amp; MONOLITH</span>
           </div>
 
           <h2 className="font-cinematic text-3xl sm:text-5xl font-extrabold tracking-tight text-starlight leading-tight">
@@ -68,42 +67,79 @@ export default function SpaceAbout() {
           </p>
         </div>
 
-        {/* Central Portal + Narrative Grid */}
-        <div className="grid lg:grid-cols-12 gap-12 items-center mb-24">
+        {/* Dual Visual Grid: Sharp Rectangular Portrait + EXODE Monolith Artwork */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-20">
           
-          {/* LEFT: The EXODE Luminous Portal Ring with Ganesh's Portrait */}
-          <div className="lg:col-span-5 flex justify-center relative">
-            <div className="relative">
-              {/* Luminous Neon Ring Portal Component */}
-              <CosmicRing size={380} glowColor="#00d4ff">
-                {/* Central Identity Capsule */}
-                <div className="relative w-44 h-44 rounded-full overflow-hidden border-2 border-stellar-cyan/60 shadow-stellar-lg">
-                  <img
-                    src="/images/profile.png"
-                    alt={PERSONAL_INFO.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
-                  {/* Fallback initials if image ever fails */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stellar-deep to-void text-white font-cinematic font-bold text-3xl -z-10">
-                    GY
+          {/* LEFT: Dual Visual Cards (Ganesh's Sharp Rectangular Portrait + EXODE Monolith) */}
+          <div className="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-1 gap-5">
+            
+            {/* CARD 1: Sharp Rectangular Portrait (NO CIRCLING, NO RINGS AROUND PHOTO) */}
+            <div className="relative rounded-2xl overflow-hidden border border-stellar-cyan/30 bg-cosmos/90 shadow-cosmic-card group">
+              <div className="relative w-full aspect-[4/5] overflow-hidden">
+                <img
+                  src="/images/profile.png"
+                  alt={PERSONAL_INFO.name}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-black/30 pointer-events-none" />
+                
+                {/* Fallback initials if image fails */}
+                <div className="absolute inset-0 flex items-center justify-center bg-cosmos text-white font-cinematic font-bold text-4xl -z-10">
+                  GY
+                </div>
+
+                {/* Status Beacon Top */}
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-void/80 border border-stellar-cyan/30 backdrop-blur-md text-[10px] font-mono text-stellar-cyan flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>SYSTEM_OPERATOR</span>
+                </div>
+
+                {/* Bottom Overlay Label */}
+                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-void/85 border border-white/10 backdrop-blur-md flex items-center justify-between">
+                  <div>
+                    <h3 className="font-cinematic font-bold text-sm text-starlight">
+                      GANESH YANDIGERI
+                    </h3>
+                    <p className="text-[10px] font-mono text-stellar-glow">
+                      AI Systems Engineer · Bangalore
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[9px] font-mono text-emerald-400 font-bold block">
+                      MCA 9.35
+                    </span>
+                    <span className="text-[8px] font-mono text-stardust">
+                      0 BACKLOGS
+                    </span>
                   </div>
                 </div>
-              </CosmicRing>
-
-              {/* Orbiting Telemetry Badges around the portal */}
-              <div className="absolute -top-3 -right-2 px-3 py-1.5 rounded-full cosmic-hud text-[11px] font-mono text-stellar-cyan border border-stellar-cyan/30 shadow-stellar-sm flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                <span>MCA CGPA: 9.35</span>
-              </div>
-
-              <div className="absolute -bottom-4 -left-2 px-3.5 py-1.5 rounded-full cosmic-hud text-[11px] font-mono text-starlight border border-white/10 shadow-stellar-sm flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>BANGALORE · SYS READY</span>
               </div>
             </div>
+
+            {/* CARD 2: User's Uploaded EXODE Monolith Artwork */}
+            <div className="relative rounded-2xl overflow-hidden border border-stellar-cyan/30 bg-cosmos/90 shadow-cosmic-card group">
+              <div className="relative w-full aspect-[16/10] overflow-hidden">
+                <img
+                  src="/images/exode-monolith.png"
+                  alt="EXODE Monolith & Luminous Portal"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-black/30 pointer-events-none" />
+
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-void/80 border border-stellar-cyan/30 backdrop-blur-md text-[10px] font-mono text-stellar-cyan">
+                  EXODE // MONOLITH_PORTAL
+                </div>
+
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-starlight bg-void/80 px-3 py-1.5 rounded-lg border border-white/10">
+                  <span className="text-stardust">ORIGINAL SOUNDTRACK ARCHITECTURE</span>
+                  <span className="text-stellar-cyan">SECTOR_ALPHA</span>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           {/* RIGHT: Deep Story & Engineering Philosophy */}
@@ -140,7 +176,7 @@ export default function SpaceAbout() {
 
         </div>
 
-        {/* 4 Thematic Pillars (Inspired by the editorial grid from references) */}
+        {/* 4 Thematic Pillars */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {ORBITING_PILLARS.map((pillar) => (
             <div

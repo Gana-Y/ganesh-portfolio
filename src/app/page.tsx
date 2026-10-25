@@ -1,6 +1,7 @@
 import SpaceNav from '@/components/layout/SpaceNav';
 import SpaceHero from '@/components/sections/SpaceHero';
 import SpaceAbout from '@/components/sections/SpaceAbout';
+import SpaceSingularity from '@/components/sections/SpaceSingularity';
 import SpaceProjects from '@/components/sections/SpaceProjects';
 import SpaceSkills from '@/components/sections/SpaceSkills';
 import SpaceCerts from '@/components/sections/SpaceCerts';
@@ -13,7 +14,7 @@ import ScrollProgress from '@/components/ui/ScrollProgress';
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-void text-starlight overflow-hidden selection:bg-stellar-cyan/30 selection:text-starlight">
-      {/* Deep Space Background Layer */}
+      {/* Deep Space Interactive Background Layer */}
       <StarField />
       
       {/* Interactive HUD Overlay Tools */}
@@ -26,6 +27,7 @@ export default function Home() {
       {/* Deep Space Mission Sectors */}
       <SpaceHero />
       <SpaceAbout />
+      <SpaceSingularity />
       <SpaceProjects />
       <SpaceSkills />
       <SpaceCerts />
