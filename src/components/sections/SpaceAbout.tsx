@@ -67,14 +67,12 @@ export default function SpaceAbout() {
           </p>
         </div>
 
-        {/* Dual Visual Grid: Sharp Rectangular Portrait + EXODE Monolith Artwork */}
+        {/* Main Grid: Sharp Rectangular Portrait + Deep Story */}
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-20">
           
-          {/* LEFT: Dual Visual Cards (Ganesh's Sharp Rectangular Portrait + EXODE Monolith) */}
-          <div className="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-1 gap-5">
-            
-            {/* CARD 1: Sharp Rectangular Portrait (NO CIRCLING, NO RINGS AROUND PHOTO) */}
-            <div className="relative rounded-2xl overflow-hidden border border-stellar-cyan/30 bg-cosmos/90 shadow-cosmic-card group">
+          {/* LEFT: Sharp Rectangular Portrait (Clean, High-End Studio Framing) */}
+          <div className="lg:col-span-5 flex justify-center">
+            <div className="relative w-full max-w-[360px] rounded-2xl overflow-hidden border border-stellar-cyan/30 bg-cosmos/90 shadow-cosmic-card group">
               <div className="relative w-full aspect-[4/5] overflow-hidden">
                 <img
                   src="/images/profile.png"
@@ -98,7 +96,7 @@ export default function SpaceAbout() {
                 </div>
 
                 {/* Bottom Overlay Label */}
-                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-void/85 border border-white/10 backdrop-blur-md flex items-center justify-between">
+                <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-void/85 border border-white/10 backdrop-blur-md flex items-center justify-between">
                   <div>
                     <h3 className="font-cinematic font-bold text-sm text-starlight">
                       GANESH YANDIGERI
@@ -118,28 +116,6 @@ export default function SpaceAbout() {
                 </div>
               </div>
             </div>
-
-            {/* CARD 2: User's Uploaded EXODE Monolith Artwork */}
-            <div className="relative rounded-2xl overflow-hidden border border-stellar-cyan/30 bg-cosmos/90 shadow-cosmic-card group">
-              <div className="relative w-full aspect-[16/10] overflow-hidden">
-                <img
-                  src="/images/exode-monolith.png"
-                  alt="EXODE Monolith & Luminous Portal"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-black/30 pointer-events-none" />
-
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-void/80 border border-stellar-cyan/30 backdrop-blur-md text-[10px] font-mono text-stellar-cyan">
-                  EXODE // MONOLITH_PORTAL
-                </div>
-
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-starlight bg-void/80 px-3 py-1.5 rounded-lg border border-white/10">
-                  <span className="text-stardust">ORIGINAL SOUNDTRACK ARCHITECTURE</span>
-                  <span className="text-stellar-cyan">SECTOR_ALPHA</span>
-                </div>
-              </div>
-            </div>
-
           </div>
 
           {/* RIGHT: Deep Story & Engineering Philosophy */}

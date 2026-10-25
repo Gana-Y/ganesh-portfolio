@@ -8,7 +8,6 @@ import SpaceCerts from '@/components/sections/SpaceCerts';
 import SpaceContact from '@/components/sections/SpaceContact';
 import SpaceFooter from '@/components/layout/SpaceFooter';
 import StarField from '@/components/ui/StarField';
-import CustomCursor from '@/components/ui/CustomCursor';
 import ScrollProgress from '@/components/ui/ScrollProgress';
 
 export default function Home() {
@@ -17,8 +16,7 @@ export default function Home() {
       {/* Deep Space Interactive Background Layer */}
       <StarField />
       
-      {/* Interactive HUD Overlay Tools */}
-      <CustomCursor />
+      {/* Tracking Line */}
       <ScrollProgress />
       
       {/* Navigation */}
