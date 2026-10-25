@@ -7,8 +7,8 @@ export default function CustomCursor() {
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Hide on mobile
-    if (window.innerWidth < 768) return;
+    // Hide on mobile / touch devices
+    if (typeof window === 'undefined' || window.innerWidth < 768) return;
 
     const dot = dotRef.current;
     const ring = ringRef.current;
@@ -26,23 +26,25 @@ export default function CustomCursor() {
     };
 
     const animateRing = () => {
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
+      ringX += (mouseX - ringX) * 0.14;
+      ringY += (mouseY - ringY) * 0.14;
       ring.style.left = `${ringX}px`;
       ring.style.top = `${ringY}px`;
       animId = requestAnimationFrame(animateRing);
     };
 
     const onMouseEnterLink = () => {
-      dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
-      ring.style.transform = 'translate(-50%, -50%) scale(1.8)';
-      ring.style.borderColor = 'rgba(167, 139, 250, 0.8)';
+      dot.style.transform = 'translate(-50%, -50%) scale(1.6)';
+      ring.style.transform = 'translate(-50%, -50%) scale(1.9)';
+      ring.style.borderColor = 'rgba(0, 212, 255, 0.9)';
+      ring.style.boxShadow = '0 0 15px rgba(0, 212, 255, 0.5)';
     };
 
     const onMouseLeaveLink = () => {
       dot.style.transform = 'translate(-50%, -50%) scale(1)';
       ring.style.transform = 'translate(-50%, -50%) scale(1)';
-      ring.style.borderColor = 'rgba(139, 92, 246, 0.6)';
+      ring.style.borderColor = 'rgba(0, 212, 255, 0.45)';
+      ring.style.boxShadow = 'none';
     };
 
     document.querySelectorAll('a, button, [role="button"]').forEach((el) => {
@@ -51,11 +53,15 @@ export default function CustomCursor() {
     });
 
     window.addEventListener('mousemove', onMouseMove);
-    animateRing();
+    animId = requestAnimationFrame(animateRing);
 
     return () => {
-      cancelAnimationFrame(animId);
       window.removeEventListener('mousemove', onMouseMove);
+      cancelAnimationFrame(animId);
+      document.querySelectorAll('a, button, [role="button"]').forEach((el) => {
+        el.removeEventListener('mouseenter', onMouseEnterLink);
+        el.removeEventListener('mouseleave', onMouseLeaveLink);
+      });
     };
   }, []);
 
@@ -63,13 +69,13 @@ export default function CustomCursor() {
     <>
       <div
         ref={dotRef}
-        className="cursor-dot fixed w-2 h-2 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 hidden md:block"
-        style={{ background: 'var(--neon-violet)' }}
+        className="cursor-dot fixed w-2 h-2 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 hidden md:block"
+        style={{ background: '#00d4ff', boxShadow: '0 0 10px #00d4ff' }}
       />
       <div
         ref={ringRef}
-        className="cursor-ring fixed w-9 h-9 rounded-full pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2 hidden md:block"
-        style={{ border: '1.5px solid rgba(139, 92, 246, 0.6)' }}
+        className="cursor-ring fixed w-8 h-8 rounded-full pointer-events-none z-[9998] -translate-x-1/2 -translate-y-1/2 hidden md:block transition-all duration-150"
+        style={{ border: '1.5px solid rgba(0, 212, 255, 0.45)' }}
       />
     </>
   );

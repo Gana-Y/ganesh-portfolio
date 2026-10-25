@@ -1,33 +1,38 @@
-import Navbar from '@/components/layout/Navbar';
-import HeroSection from '@/components/sections/HeroSection';
-import AboutSection from '@/components/sections/AboutSection';
-import SkillsSection from '@/components/sections/SkillsSection';
-import ProjectsSection from '@/components/sections/ProjectsSection';
-import CertificationsSection from '@/components/sections/CertificationsSection';
-import GitHubSection from '@/components/sections/GitHubSection';
-import BlogSection from '@/components/sections/BlogSection';
-import ContactSection from '@/components/sections/ContactSection';
-import Footer from '@/components/layout/Footer';
-import ParticleBackground from '@/components/ui/ParticleBackground';
+import SpaceNav from '@/components/layout/SpaceNav';
+import SpaceHero from '@/components/sections/SpaceHero';
+import SpaceAbout from '@/components/sections/SpaceAbout';
+import SpaceProjects from '@/components/sections/SpaceProjects';
+import SpaceSkills from '@/components/sections/SpaceSkills';
+import SpaceCerts from '@/components/sections/SpaceCerts';
+import SpaceContact from '@/components/sections/SpaceContact';
+import SpaceFooter from '@/components/layout/SpaceFooter';
+import StarField from '@/components/ui/StarField';
 import CustomCursor from '@/components/ui/CustomCursor';
 import ScrollProgress from '@/components/ui/ScrollProgress';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
-      <ParticleBackground />
+    <main className="relative min-h-screen bg-void text-starlight overflow-hidden selection:bg-stellar-cyan/30 selection:text-starlight">
+      {/* Deep Space Background Layer */}
+      <StarField />
+      
+      {/* Interactive HUD Overlay Tools */}
       <CustomCursor />
       <ScrollProgress />
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <CertificationsSection />
-      <GitHubSection />
-      <BlogSection />
-      <ContactSection />
-      <Footer />
+      
+      {/* Navigation */}
+      <SpaceNav />
+      
+      {/* Deep Space Mission Sectors */}
+      <SpaceHero />
+      <SpaceAbout />
+      <SpaceProjects />
+      <SpaceSkills />
+      <SpaceCerts />
+      <SpaceContact />
+      
+      {/* Footer */}
+      <SpaceFooter />
     </main>
   );
 }

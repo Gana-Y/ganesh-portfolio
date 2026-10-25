@@ -3,60 +3,52 @@ import '@/styles/globals.css';
 import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
-  title: 'Ganesh Y — AI Engineer',
+  title: 'Ganesh Yandigeri — Python & AI Systems Engineer',
   description:
-    'Aspiring AI/ML Engineer building with Python, LLMs, Deep Learning & Machine Learning. Passionate about healthcare and fintech AI applications.',
+    'Python & AI Systems Engineer building low-latency matching engines and multimodal RAG architectures. Deep space edition.',
   keywords: [
     'AI Engineer',
     'Machine Learning',
     'Deep Learning',
     'LLMs',
     'Python',
-    'PyTorch',
-    'TensorFlow',
-    'LangChain',
-    'Healthcare AI',
-    'FinTech AI',
+    'FastAPI',
+    'RAG',
+    'ChromaDB',
+    'Low-Latency',
     'Ganesh Yandigeri',
   ],
-  authors: [{ name: 'Ganesh Y', url: 'https://github.com/Gana-Y' }],
-  creator: 'Ganesh Y',
+  authors: [{ name: 'Ganesh Yandigeri', url: 'https://github.com/Gana-Y' }],
+  creator: 'Ganesh Yandigeri',
   metadataBase: new URL('https://ganesh-portfolio-silk-five.vercel.app'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://ganesh-portfolio-silk-five.vercel.app',
-    title: 'Ganesh Y — AI Engineer',
+    title: 'Ganesh Yandigeri — Python & AI Systems Engineer',
     description:
-      'Aspiring AI/ML Engineer building next-generation intelligent systems in healthcare and finance.',
-    siteName: 'Ganesh Y Portfolio',
+      'Python & AI Systems Engineer building low-latency matching engines and multimodal RAG architectures.',
+    siteName: 'Ganesh Yandigeri Portfolio',
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Ganesh Y — AI Engineer Portfolio',
+        url: '/images/profile.png',
+        width: 800,
+        height: 800,
+        alt: 'Ganesh Yandigeri',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ganesh Y — AI Engineer',
+    title: 'Ganesh Yandigeri — Python & AI Systems Engineer',
     description:
-      'Aspiring AI/ML Engineer building next-generation intelligent systems in healthcare and finance.',
+      'Python & AI Systems Engineer building low-latency matching engines and multimodal RAG architectures.',
     creator: '@Ganesh821060',
-    images: ['/og-image.jpg'],
+    images: ['/images/profile.png'],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
   icons: {
     icon: '/favicon.ico',
@@ -68,7 +60,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#030308',
+  themeColor: '#020205',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -78,18 +70,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="bg-abyss text-text-primary font-body antialiased overflow-x-hidden">
-        <div className="noise-overlay">
-          {children}
-        </div>
+      <body className="bg-void text-starlight font-body antialiased overflow-x-hidden">
+        {children}
         <Toaster
           position="bottom-right"
           toastOptions={{
             style: {
-              background: 'rgba(18, 18, 31, 0.9)',
-              border: '1px solid rgba(124, 58, 237, 0.3)',
-              color: '#f8f7ff',
+              background: 'rgba(7, 11, 22, 0.9)',
+              border: '1px solid rgba(0, 212, 255, 0.3)',
+              color: '#f0f6fc',
               backdropFilter: 'blur(16px)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '12px',
             },
           }}
         />
