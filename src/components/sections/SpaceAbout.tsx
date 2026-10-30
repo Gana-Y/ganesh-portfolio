@@ -140,14 +140,14 @@ export default function SpaceAbout() {
               </p>
 
               <p className="text-stardust leading-relaxed">
-                Whether orchestrating ChromaDB vector graphs with Google Gemini embeddings in <span className="text-starlight font-mono">Florix AI</span>, or designing heap-indexed price-time matching engines processing <span className="text-stellar-cyan font-mono font-semibold">136,000 orders/sec</span> with <span className="text-stellar-cyan font-mono font-semibold">4.3µs</span> latency in <span className="text-starlight font-mono">OrderCore</span>, my commitment is to code that is mathematically sound, rigorously tested, and built for production.
+                Whether orchestrating ChromaDB vector graphs with Google Gemini embeddings in <span className="text-starlight font-mono">Florix AI</span>, designing heap-indexed price-time matching engines processing <span className="text-stellar-cyan font-mono font-semibold">136,000 orders/sec</span> with <span className="text-stellar-cyan font-mono font-semibold">4.3µs</span> latency in <span className="text-starlight font-mono">OrderCore</span>, or architecting multi-tenant Linux cgroup sandboxes with POSIX signal verdict arbitration in <span className="text-stellar-cyan font-mono font-semibold">Vesper</span>, my commitment is to code that is mathematically sound, rigorously tested, and built for production.
               </p>
             </div>
 
             {/* Quick Metrics Cards */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
               {[
-                { label: 'PROJECTS', val: '5+' },
+                { label: 'PROJECTS', val: '6+' },
                 { label: 'MCA CGPA', val: '9.35' },
                 { label: 'PYTHON', val: '35K+ LOC' },
                 { label: 'BACKLOGS', val: '0 ACTIVE' },

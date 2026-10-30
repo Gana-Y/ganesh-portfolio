@@ -83,6 +83,30 @@ export const PROJECTS: Project[] = [
   },
   {
     id: '3',
+    title: 'Vesper — Sandboxed Code Execution Engine & Online Judge Arbiter',
+    subtitle: 'Sandboxed Code Execution Engine & Online Judge Arbiter',
+    category: 'Systems Programming / Backend / DevOps',
+    date: 'October 2026',
+    description:
+      'Isolated, multi-tenant code execution engine and automated judge arbiter evaluating untrusted C++17, Python 3, and Java submissions with Linux cgroup sandboxing, PID caps, and sub-millisecond execution telemetry.',
+    techStack: ['Python', 'FastAPI', 'Docker', 'Linux cgroups', 'C++17', 'Java 17+', 'Uvicorn', 'Pytest', 'Bash', 'REST APIs', 'Render'],
+    githubUrl: 'https://github.com/Gana-Y/vesper-engine',
+    liveUrl: 'https://vesper-engine.onrender.com',
+    swaggerUrl: 'https://vesper-engine.onrender.com/docs',
+    imageUrl: '/images/vesper.png',
+    tags: ['Online Judge', 'Linux cgroups', 'Docker Sandbox', 'FastAPI', 'Systems Architecture'],
+    featured: true,
+    status: 'Production / Live',
+    highlights: [
+      'Hardened Sandbox Isolation: Enforces defense-in-depth security envelopes using Docker and Linux cgroups, including strict PID limits (pids_limit=64 for fork-bomb immunity), air-gapped networking (network_disabled=True), and read-only root filesystems with ephemeral /tmp tmpfs mounts.',
+      'Dual-Backend Architecture: Engineered an abstraction layer supporting containerized cgroups for production workloads alongside a zero-dependency local process supervisor for microsecond wall-clock timing and peak RSS memory tracking.',
+      '7-State Verdict Arbitration: Parses POSIX signals and exact stdout diffs to evaluate submissions into standard online judge verdicts: AC (Accepted), WA (Wrong Answer), TLE (Time Limit Exceeded), MLE (Memory Limit Exceeded), RE (Runtime Error), CE (Compilation Error), and OLE (Output Limit Exceeded).',
+      'Interactive Studio & Production API: Built a modern obsidian developer workstation with live telemetry and keyboard shortcuts, supported by an asynchronous FastAPI REST API deployed live on Render with sub-90ms cloud evaluation latencies.',
+      'Test Automation: Backed by a 100% passing Pytest test suite covering syntax errors, memory limits, infinite loop timeouts, and edge cases.',
+    ],
+  },
+  {
+    id: '4',
     title: 'MedAI Diagnosis Assistant',
     description:
       'An AI-powered medical diagnosis assistant leveraging large language models and computer vision to analyze symptoms and medical imaging. Integrates RAG pipeline for evidence-based recommendations.',
@@ -95,7 +119,7 @@ export const PROJECTS: Project[] = [
     status: 'In Progress',
   },
   {
-    id: '4',
+    id: '5',
     title: 'FinSight — Market Intelligence',
     description:
       'Real-time financial market analysis tool using NLP to parse earnings calls, news sentiment, and SEC filings. Generates AI-driven investment insights with explainable predictions.',
@@ -108,7 +132,7 @@ export const PROJECTS: Project[] = [
     status: 'Building',
   },
   {
-    id: '5',
+    id: '6',
     title: 'Neural Document Q&A System',
     description:
       'A RAG-based document intelligence system that ingests PDFs, research papers, and knowledge bases, enabling semantic search and conversational querying with citation tracking.',
