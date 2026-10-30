@@ -25,6 +25,10 @@ export interface Certification {
   issuer: string;
   date: string;
   credentialUrl: string;
+  pdfUrl?: string;
+  previewUrl?: string;
+  credentialId?: string;
+  skills?: string[];
   icon: string;
   color: string;
 }

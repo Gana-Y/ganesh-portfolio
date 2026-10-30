@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import '@/styles/globals.css';
 import { Toaster } from 'sonner';
+import SmoothScroll from '@/components/providers/SmoothScroll';
 
 export const metadata: Metadata = {
   title: 'Ganesh Yandigeri — Python & AI Systems Engineer',
@@ -65,13 +66,15 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="bg-void text-starlight font-body antialiased overflow-x-hidden">
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
         <Toaster
           position="bottom-right"
           toastOptions={{

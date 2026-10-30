@@ -10,6 +10,7 @@ interface Star {
   opacity: number;
   twinkleSpeed: number;
   color: string;
+  hasHalo: boolean;
 }
 
 export default function StarField() {
@@ -18,7 +19,7 @@ export default function StarField() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
@@ -30,69 +31,78 @@ export default function StarField() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
 
-    // Mouse parallax
-    let mouseX = 0;
-    let mouseY = 0;
+    // Smooth Mouse Parallax with Linear Interpolation (Lerp)
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+    let currentMouseX = 0;
+    let currentMouseY = 0;
+
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX = (e.clientX - width / 2) * 0.03;
-      mouseY = (e.clientY - height / 2) * 0.03;
+      targetMouseX = (e.clientX - width / 2) * 0.025;
+      targetMouseY = (e.clientY - height / 2) * 0.025;
     };
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
-    // Generate stars
-    const starCount = Math.floor((width * height) / 3200);
+    // Generate Stars (Balanced density for 60-120fps efficiency)
+    const starCount = Math.min(300, Math.floor((width * height) / 4500));
     const starColors = ['#f0f6fc', '#e0f2fe', '#bae6fd', '#38bdf8', '#00d4ff', '#818cf8'];
-    const stars: Star[] = Array.from({ length: starCount }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      z: Math.random() * 2 + 0.5,
-      size: Math.random() * 1.6 + 0.4,
-      opacity: Math.random() * 0.8 + 0.2,
-      twinkleSpeed: Math.random() * 0.02 + 0.005,
-      color: starColors[Math.floor(Math.random() * starColors.length)],
-    }));
+    const stars: Star[] = Array.from({ length: starCount }, () => {
+      const size = Math.random() * 1.5 + 0.4;
+      return {
+        x: Math.random() * width,
+        y: Math.random() * height,
+        z: Math.random() * 2 + 0.5,
+        size,
+        opacity: Math.random() * 0.75 + 0.25,
+        twinkleSpeed: Math.random() * 0.02 + 0.006,
+        color: starColors[Math.floor(Math.random() * starColors.length)],
+        hasHalo: size > 1.2,
+      };
+    });
 
     let time = 0;
     const render = () => {
       time += 1;
+      
+      // Interpolate mouse smoothly
+      currentMouseX += (targetMouseX - currentMouseX) * 0.05;
+      currentMouseY += (targetMouseY - currentMouseY) * 0.05;
+
       ctx.clearRect(0, 0, width, height);
 
-      // Deep space background gradient
-      const bgGrad = ctx.createRadialGradient(
-        width / 2,
-        height / 2,
-        100,
-        width / 2,
-        height / 2,
-        Math.max(width, height)
-      );
-      bgGrad.addColorStop(0, 'rgba(7, 15, 36, 0.4)');
-      bgGrad.addColorStop(0.6, 'rgba(3, 7, 18, 0.7)');
-      bgGrad.addColorStop(1, 'rgba(2, 2, 5, 0.95)');
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(0, 0, width, height);
-
-      // Draw each star
-      stars.forEach((star) => {
+      // Draw each star with GPU-friendly paths (no CPU shadowBlur penalties)
+      for (let i = 0; i < stars.length; i++) {
+        const star = stars[i];
         const twinkle = Math.sin(time * star.twinkleSpeed) * 0.35 + 0.65;
-        const currentOpacity = Math.max(0.1, Math.min(1, star.opacity * twinkle));
+        const currentOpacity = star.opacity * twinkle;
 
-        const renderX = star.x - mouseX * star.z;
-        const renderY = star.y - mouseY * star.z;
+        const renderX = star.x - currentMouseX * star.z;
+        const renderY = star.y - currentMouseY * star.z;
 
+        // Wrap around viewport edges smoothly
+        const wrappedX = ((renderX % width) + width) % width;
+        const wrappedY = ((renderY % height) + height) % height;
+
+        // Fast GPU Halo for larger stars without expensive shadowBlur
+        if (star.hasHalo) {
+          ctx.beginPath();
+          ctx.arc(wrappedX, wrappedY, star.size * 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = star.color;
+          ctx.globalAlpha = currentOpacity * 0.2;
+          ctx.fill();
+        }
+
+        // Crisp Inner Core
         ctx.beginPath();
-        ctx.arc(renderX, renderY, star.size * (0.8 + twinkle * 0.3), 0, Math.PI * 2);
+        ctx.arc(wrappedX, wrappedY, star.size * (0.8 + twinkle * 0.2), 0, Math.PI * 2);
         ctx.fillStyle = star.color;
         ctx.globalAlpha = currentOpacity;
-        ctx.shadowBlur = star.size > 1.2 ? 6 : 0;
-        ctx.shadowColor = star.color;
         ctx.fill();
-      });
+      }
 
       ctx.globalAlpha = 1.0;
-      ctx.shadowBlur = 0;
       animationFrameId = requestAnimationFrame(render);
     };
 
@@ -106,10 +116,21 @@ export default function StarField() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.9 }}
-    />
+    <>
+      {/* Deep Space Background Radial Vignette (CSS rendered on GPU compositor) */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(7, 15, 36, 0.4) 0%, rgba(3, 7, 18, 0.75) 60%, rgba(2, 2, 5, 0.98) 100%)',
+        }}
+      />
+      
+      {/* High-Performance Canvas Star Layer */}
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 pointer-events-none z-0 will-change-transform"
+        style={{ opacity: 0.95 }}
+      />
+    </>
   );
 }

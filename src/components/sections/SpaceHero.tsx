@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ArrowDown, Terminal, Eye, Zap, Shield, Cpu, Image as ImageIcon, Video } from 'lucide-react';
+import { ChevronRight, ArrowDown, Terminal, Eye, Zap, Shield, Cpu, Video } from 'lucide-react';
 import { PERSONAL_INFO } from '@/data';
 
 const TELEMETRY = [
@@ -34,7 +34,6 @@ const PHASE_TEXTS = [
 
 export default function SpaceHero() {
   const [phaseIndex, setPhaseIndex] = useState(0);
-  const [viewMode, setViewMode] = useState<'video' | 'art'>('video');
 
   // Cycle transmission phase every 4.5 seconds
   useEffect(() => {
@@ -45,8 +44,13 @@ export default function SpaceHero() {
   }, []);
 
   const handleScroll = (id: string) => {
+    const lenis = (window as any).__lenis;
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (lenis && el) {
+      lenis.scrollTo(el, { offset: -70, duration: 1.2 });
+    } else if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -64,7 +68,7 @@ export default function SpaceHero() {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* ============================================================== */}
-          {/* LEFT: THE COSMIC EYE PORTAL (VIDEO + ARTWORK SWITCHER)         */}
+          {/* LEFT: THE COSMIC EYE PORTAL (LIVE OCULAR FEED)                 */}
           {/* ============================================================== */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -75,24 +79,16 @@ export default function SpaceHero() {
             {/* Outer HUD Framing Container */}
             <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border border-stellar-cyan/30 bg-cosmos/80 shadow-stellar-md group">
               
-              {/* Conditional Display: Live Blinking Video OR High-Res Artwork */}
-              {viewMode === 'video' ? (
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover opacity-90 transition-opacity duration-700"
-                >
-                  <source src="/videos/eye-hero.mp4" type="video/mp4" />
-                </video>
-              ) : (
-                <img
-                  src="/images/cosmic-eye-art.jpg"
-                  alt="The Cosmic Eye Silhouette Artwork"
-                  className="w-full h-full object-cover opacity-95 transition-opacity duration-700"
-                />
-              )}
+              {/* Dedicated Live Blinking Video Feed */}
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover opacity-90 transition-opacity duration-700"
+              >
+                <source src="/videos/eye-hero.mp4" type="video/mp4" />
+              </video>
 
               {/* Edge Vignette & Dark Cosmic Gradients */}
               <div className="absolute inset-0 bg-gradient-to-t from-void via-transparent to-void/60 pointer-events-none" />
@@ -125,32 +121,11 @@ export default function SpaceHero() {
                 </svg>
               </div>
 
-              {/* Top HUD Status Bar & Video / Artwork Toggle */}
+              {/* Top HUD Status Bar */}
               <div className="absolute top-3 left-4 right-4 flex items-center justify-between text-[10px] font-mono tracking-widest text-stellar-cyan z-20">
-                <div className="flex items-center gap-1.5 p-1 rounded-full bg-void/80 border border-stellar-cyan/30 backdrop-blur-md">
-                  <button
-                    onClick={() => setViewMode('video')}
-                    className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-full transition-all ${
-                      viewMode === 'video'
-                        ? 'bg-stellar-cyan text-void font-bold shadow-sm'
-                        : 'text-stardust hover:text-starlight'
-                    }`}
-                  >
-                    <Video className="w-3 h-3" />
-                    <span>LIVE EYE VIDEO</span>
-                  </button>
-
-                  <button
-                    onClick={() => setViewMode('art')}
-                    className={`flex items-center gap-1.5 px-2.5 py-0.5 rounded-full transition-all ${
-                      viewMode === 'art'
-                        ? 'bg-stellar-cyan text-void font-bold shadow-sm'
-                        : 'text-stardust hover:text-starlight'
-                    }`}
-                  >
-                    <ImageIcon className="w-3 h-3" />
-                    <span>ORIGINAL ART</span>
-                  </button>
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-void/80 border border-stellar-cyan/30 backdrop-blur-md">
+                  <span className="w-2 h-2 rounded-full bg-stellar-cyan animate-pulse" />
+                  <span className="font-bold tracking-wider">LIVE EYE OCULAR // 24 FPS</span>
                 </div>
 
                 <div className="flex items-center gap-1.5 text-stardust bg-void/60 px-2 py-0.5 rounded border border-white/5 hidden sm:flex">
@@ -163,7 +138,7 @@ export default function SpaceHero() {
               <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between z-20 text-[11px] font-mono">
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-void/80 border border-stellar-cyan/20 backdrop-blur-md text-starlight">
                   <Eye className="w-3.5 h-3.5 text-stellar-cyan animate-pulse" />
-                  <span>{viewMode === 'video' ? 'OCULAR HUD :: BLINK SYNCED' : 'CYBERNETIC IRIS :: 4K RENDER'}</span>
+                  <span>OCULAR HUD :: BLINK SYNCED</span>
                 </div>
                 <span className="text-stardust text-[10px] tracking-wider hidden sm:block">
                   COORD: 12.9716° N, 77.5946° E
@@ -174,10 +149,10 @@ export default function SpaceHero() {
             {/* Glowing Corner Accents on the Container */}
             <div className="flex items-center justify-between px-2 text-[10px] font-mono text-stardust/70">
               <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 NEURAL VISUAL FEED // 1280×720 OCULAR
               </span>
-              <span>SWITCH FEED VIA TOGGLE BUTTONS ABOVE</span>
+              <span className="text-stellar-cyan">OCULAR REASONING ACTIVE</span>
             </div>
           </motion.div>
 

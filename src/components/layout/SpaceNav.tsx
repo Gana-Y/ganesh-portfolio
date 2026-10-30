@@ -22,8 +22,13 @@ export default function SpaceNav() {
 
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
+    const lenis = (window as any).__lenis;
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (lenis && el) {
+      lenis.scrollTo(el as HTMLElement, { offset: -70, duration: 1.2 });
+    } else if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -46,7 +51,12 @@ export default function SpaceNav() {
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              const lenis = (window as any).__lenis;
+              if (lenis) {
+                lenis.scrollTo(0, { duration: 1.2 });
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
             }}
             className="flex items-center gap-2.5 group"
           >

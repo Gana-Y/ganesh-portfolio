@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Navigation,
   Volume2,
@@ -9,8 +9,6 @@ import {
   Play,
   Pause,
   Maximize2,
-  Video,
-  Image as ImageIcon,
   Sparkles,
   Waves,
   Cpu,
@@ -19,7 +17,6 @@ import {
 export default function SpaceSingularity() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
-  const [viewMode, setViewMode] = useState<'video' | 'art'>('video');
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const togglePlay = () => {
@@ -66,7 +63,7 @@ export default function SpaceSingularity() {
           </p>
         </div>
 
-        {/* Central Masterpiece Showcase: User's Clean Looping Video & Artwork */}
+        {/* Central Masterpiece Showcase: User's Clean Looping Video */}
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* LEFT: 4K Looping Singularity Video Showcase */}
@@ -79,46 +76,20 @@ export default function SpaceSingularity() {
           >
             <div className="relative w-full max-w-xl aspect-[1/1] sm:aspect-[4/3] lg:aspect-[1/1] rounded-3xl overflow-hidden border border-stellar-cyan/40 bg-cosmos/90 shadow-stellar-lg group">
               
-              {/* Active Visual Stream: Clean Video or Artwork */}
-              <AnimatePresence mode="wait">
-                {viewMode === 'video' ? (
-                  <motion.div
-                    key="video-view"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full h-full relative"
-                  >
-                    <video
-                      ref={videoRef}
-                      autoPlay
-                      loop
-                      muted={isMuted}
-                      playsInline
-                      className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105"
-                    >
-                      <source src="/videos/wormhole-loop.mp4" type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="art-view"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full h-full relative"
-                  >
-                    <img
-                      src="/images/wormhole-portal.png"
-                      alt="The Cosmic Singularity Portal with Sailboat"
-                      className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105"
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* Active Visual Stream: Clean Video Loop */}
+              <div className="w-full h-full relative">
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  loop
+                  muted={isMuted}
+                  playsInline
+                  className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105"
+                >
+                  <source src="/videos/wormhole-loop.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
 
               {/* Edge Vignette & Ambient Glow Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-void/90 via-transparent to-black/40 pointer-events-none" />
@@ -129,61 +100,34 @@ export default function SpaceSingularity() {
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-void/85 border border-stellar-cyan/40 backdrop-blur-md text-stellar-cyan">
                   <span className="w-2 h-2 rounded-full bg-stellar-cyan animate-ping" />
                   <span className="font-bold tracking-wider">
-                    {viewMode === 'video' ? 'LIVE LOOP // 24FPS' : 'STATIC 4K RENDER'}
+                    LIVE VORTEX LOOP // 24FPS
                   </span>
                 </div>
 
-                {/* Video / Artwork Mode Switcher */}
-                <div className="flex items-center gap-1 p-1 rounded-full bg-void/85 border border-white/10 backdrop-blur-md">
-                  <button
-                    onClick={() => setViewMode('video')}
-                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono transition-all ${
-                      viewMode === 'video'
-                        ? 'bg-stellar-cyan text-void font-bold shadow-stellar-sm'
-                        : 'text-stardust hover:text-white'
-                    }`}
-                    title="Looping Video Stream"
-                  >
-                    <Video className="w-3 h-3" />
-                    <span className="hidden sm:inline">LOOP</span>
-                  </button>
-                  <button
-                    onClick={() => setViewMode('art')}
-                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono transition-all ${
-                      viewMode === 'art'
-                        ? 'bg-stellar-cyan text-void font-bold shadow-stellar-sm'
-                        : 'text-stardust hover:text-white'
-                    }`}
-                    title="Still Artwork Render"
-                  >
-                    <ImageIcon className="w-3 h-3" />
-                    <span className="hidden sm:inline">STILL</span>
-                  </button>
+                {/* Sector Coordinate HUD Badge */}
+                <div className="px-3 py-1 rounded-full bg-void/85 border border-white/10 backdrop-blur-md text-[10px] font-mono text-stardust">
+                  SECTOR_INFINITY
                 </div>
               </div>
 
               {/* Bottom Interactive HUD Bar: Play/Pause, Sound Toggle, Telemetry */}
               <div className="absolute bottom-4 left-4 right-4 p-3.5 sm:p-4 rounded-2xl bg-void/90 border border-stellar-cyan/30 backdrop-blur-md flex flex-wrap items-center justify-between gap-3 text-xs font-mono z-20">
                 <div className="flex items-center gap-3">
-                  {viewMode === 'video' && (
-                    <>
-                      <button
-                        onClick={togglePlay}
-                        className="w-8 h-8 rounded-lg bg-stellar-cyan/15 hover:bg-stellar-cyan/30 border border-stellar-cyan/40 text-stellar-cyan flex items-center justify-center transition-colors"
-                        title={isPlaying ? 'Pause Loop' : 'Play Loop'}
-                      >
-                        {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                      </button>
+                  <button
+                    onClick={togglePlay}
+                    className="w-8 h-8 rounded-lg bg-stellar-cyan/15 hover:bg-stellar-cyan/30 border border-stellar-cyan/40 text-stellar-cyan flex items-center justify-center transition-colors"
+                    title={isPlaying ? 'Pause Loop' : 'Play Loop'}
+                  >
+                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                  </button>
 
-                      <button
-                        onClick={toggleSound}
-                        className="w-8 h-8 rounded-lg bg-stellar-cyan/15 hover:bg-stellar-cyan/30 border border-stellar-cyan/40 text-stellar-cyan flex items-center justify-center transition-colors"
-                        title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
-                      >
-                        {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-stellar-cyan animate-pulse" />}
-                      </button>
-                    </>
-                  )}
+                  <button
+                    onClick={toggleSound}
+                    className="w-8 h-8 rounded-lg bg-stellar-cyan/15 hover:bg-stellar-cyan/30 border border-stellar-cyan/40 text-stellar-cyan flex items-center justify-center transition-colors"
+                    title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+                  >
+                    {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-stellar-cyan animate-pulse" />}
+                  </button>
 
                   <div>
                     <span className="text-starlight font-cinematic font-bold block text-xs sm:text-sm tracking-wide">
