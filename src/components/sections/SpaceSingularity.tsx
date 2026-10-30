@@ -136,23 +136,9 @@ export default function SpaceSingularity() {
                     <span className="text-starlight font-cinematic font-bold block text-xs sm:text-sm tracking-wide">
                       ROUND THINGS // COSMIC VORTEX
                     </span>
-                    <span className="text-stardust text-[10px] tracking-wider block">
-                      ZERO-ARTIFACT STREAM // SECTOR_INFINITY
+                    <span className="text-stardust text-[10px] tracking-wider block font-mono">
+                      EVENT HORIZON // SECTOR_INFINITY
                     </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 text-right">
-                  <div className="hidden sm:block">
-                    <span className="text-[10px] text-emerald-400 font-bold block">
-                      WATERMARK: REMOVED
-                    </span>
-                    <span className="text-[9px] text-stardust">
-                      LOSSLESS INPAINT
-                    </span>
-                  </div>
-                  <div className="px-2.5 py-1 rounded-md bg-stellar-cyan/10 border border-stellar-cyan/30 text-stellar-cyan text-[10px] font-bold">
-                    1080P PRO
                   </div>
                 </div>
               </div>
