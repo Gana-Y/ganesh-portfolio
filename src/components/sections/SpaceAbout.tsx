@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Orbit, Code2, Heart, TrendingUp, ShieldCheck, Terminal, MapPin } from 'lucide-react';
 import { PERSONAL_INFO } from '@/data';
+import SpotlightTiltCard from '@/components/ui/SpotlightTiltCard';
+import BorderBeam from '@/components/ui/BorderBeam';
 
 const ORBITING_PILLARS = [
   {
@@ -59,7 +61,7 @@ export default function SpaceAbout() {
 
           <h2 className="font-cinematic text-3xl sm:text-5xl font-extrabold tracking-tight text-starlight leading-tight">
             THE ENGINEER BEYOND <br />
-            <span className="gradient-stellar">THE HORIZON</span>
+            <span className="shimmer-text">THE HORIZON</span>
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-stardust mt-4 tracking-wide max-w-xl mx-auto">
@@ -70,9 +72,17 @@ export default function SpaceAbout() {
         {/* Main Grid: Sharp Rectangular Portrait + Deep Story */}
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-20">
           
-          {/* LEFT: Sharp Rectangular Portrait (Clean, High-End Studio Framing) */}
+          {/* LEFT: Sharp Rectangular Portrait with 3D Spotlight Tilt & Border Beam */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-[360px] rounded-2xl overflow-hidden border border-stellar-cyan/30 bg-cosmos/90 shadow-cosmic-card group">
+            <SpotlightTiltCard
+              tiltIntensity={6}
+              spotlightColor="rgba(0, 212, 255, 0.22)"
+              showCrosshairs={true}
+              className="relative w-full max-w-[360px] rounded-2xl overflow-hidden border border-stellar-cyan/30 bg-cosmos/90 shadow-cosmic-card group"
+            >
+              {/* Luminous Starlight Border Beam */}
+              <BorderBeam duration={11} colorFrom="#00d4ff" colorTo="#38bdf8" />
+
               <div className="relative w-full aspect-[4/5] overflow-hidden">
                 <img
                   src="/images/profile.png"
@@ -90,13 +100,13 @@ export default function SpaceAbout() {
                 </div>
 
                 {/* Status Beacon Top */}
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-void/80 border border-stellar-cyan/30 backdrop-blur-md text-[10px] font-mono text-stellar-cyan flex items-center gap-1.5">
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-void/80 border border-stellar-cyan/30 backdrop-blur-md text-[10px] font-mono text-stellar-cyan flex items-center gap-1.5 z-10">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   <span>SYSTEM_OPERATOR</span>
                 </div>
 
                 {/* Bottom Overlay Label */}
-                <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-void/85 border border-white/10 backdrop-blur-md flex items-center justify-between">
+                <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-void/85 border border-white/10 backdrop-blur-md flex items-center justify-between z-10">
                   <div>
                     <h3 className="font-cinematic font-bold text-sm text-starlight">
                       GANESH YANDIGERI
@@ -115,7 +125,7 @@ export default function SpaceAbout() {
                   </div>
                 </div>
               </div>
-            </div>
+            </SpotlightTiltCard>
           </div>
 
           {/* RIGHT: Deep Story & Engineering Philosophy */}
@@ -152,12 +162,15 @@ export default function SpaceAbout() {
 
         </div>
 
-        {/* 4 Thematic Pillars */}
+        {/* 4 Thematic Pillars with 3D Spotlight Tilt */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {ORBITING_PILLARS.map((pillar) => (
-            <div
+            <SpotlightTiltCard
               key={pillar.title}
-              className="cosmic-hud cosmic-hud-hover p-6 rounded-2xl flex flex-col justify-between group"
+              tiltIntensity={9}
+              spotlightColor="rgba(0, 212, 255, 0.16)"
+              showCrosshairs={true}
+              className="cosmic-hud p-6 rounded-2xl flex flex-col justify-between group border border-white/10"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -182,7 +195,7 @@ export default function SpaceAbout() {
                 <span>SECTOR // ACTIVE</span>
                 <span className="text-stellar-cyan">→</span>
               </div>
-            </div>
+            </SpotlightTiltCard>
           ))}
         </div>
 

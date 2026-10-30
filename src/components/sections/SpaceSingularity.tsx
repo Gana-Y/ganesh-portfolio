@@ -13,6 +13,7 @@ import {
   Waves,
   Cpu,
 } from 'lucide-react';
+import BorderBeam from '@/components/ui/BorderBeam';
 
 export default function SpaceSingularity() {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -55,7 +56,7 @@ export default function SpaceSingularity() {
 
           <h2 className="font-cinematic text-3xl sm:text-5xl font-extrabold tracking-tight text-starlight leading-tight">
             NAVIGATING THE <br />
-            <span className="gradient-stellar">EVENT HORIZON</span>
+            <span className="shimmer-text">EVENT HORIZON</span>
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-stardust mt-4 tracking-wide max-w-xl mx-auto">
@@ -75,6 +76,8 @@ export default function SpaceSingularity() {
             className="lg:col-span-7 relative flex flex-col items-center"
           >
             <div className="relative w-full max-w-xl aspect-[1/1] sm:aspect-[4/3] lg:aspect-[1/1] rounded-3xl overflow-hidden border border-stellar-cyan/40 bg-cosmos/90 shadow-stellar-lg group">
+              {/* Luminous Starlight Border Beam */}
+              <BorderBeam duration={12} colorFrom="#38bdf8" colorTo="#00d4ff" />
               
               {/* Active Visual Stream: Clean Video Loop */}
               <div className="w-full h-full relative">

@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { CERTIFICATIONS } from '@/data';
 import { Certification } from '@/types';
+import SpotlightTiltCard from '@/components/ui/SpotlightTiltCard';
 
 export default function SpaceCerts() {
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
@@ -48,7 +49,7 @@ export default function SpaceCerts() {
 
           <h2 className="font-cinematic text-3xl sm:text-5xl font-extrabold tracking-tight text-starlight leading-tight">
             ORBITAL CREDENTIALS &amp; <br />
-            <span className="gradient-stellar">CERTIFICATIONS</span>
+            <span className="shimmer-text">CERTIFICATIONS</span>
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-stardust mt-4 tracking-wide max-w-xl mx-auto">
@@ -59,12 +60,11 @@ export default function SpaceCerts() {
         {/* Credentials Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {CERTIFICATIONS.map((cert) => (
-            <motion.div
+            <SpotlightTiltCard
               key={cert.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              tiltIntensity={8}
+              spotlightColor="rgba(0, 212, 255, 0.18)"
+              showCrosshairs={true}
               onClick={() => setSelectedCert(cert)}
               role="button"
               tabIndex={0}
@@ -74,7 +74,7 @@ export default function SpaceCerts() {
                   setSelectedCert(cert);
                 }
               }}
-              className="cosmic-hud cosmic-hud-hover p-5 sm:p-6 rounded-2xl flex flex-col justify-between group relative overflow-hidden cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-stellar-cyan"
+              className="cosmic-hud p-5 sm:p-6 rounded-2xl flex flex-col justify-between group relative overflow-hidden cursor-pointer text-left border border-white/10"
             >
               <div>
                 {/* Header Icon & Status Beacon */}
@@ -130,7 +130,7 @@ export default function SpaceCerts() {
                 </span>
                 <span className="text-stellar-cyan group-hover:translate-x-1 transition-transform">→</span>
               </div>
-            </motion.div>
+            </SpotlightTiltCard>
           ))}
         </div>
 

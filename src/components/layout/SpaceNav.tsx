@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Compass, Menu, X, Terminal, Radio } from 'lucide-react';
 import { NAV_LINKS } from '@/data';
 import { useScrolled, useActiveSection } from '@/hooks';
+import MagneticButton from '@/components/ui/MagneticButton';
 
 export default function SpaceNav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -110,19 +111,25 @@ export default function SpaceNav() {
             <a
               href="/resume.pdf"
               download="Ganesh_Yandigeri_Resume.pdf"
-              className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full cosmic-pill text-xs font-mono text-stellar-cyan hover:text-white"
+              className="hidden sm:inline-block"
             >
-              <Terminal className="w-3.5 h-3.5" />
-              <span>LOG (PDF)</span>
+              <MagneticButton
+                strength={0.18}
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full cosmic-pill text-xs font-mono text-stellar-cyan hover:text-white"
+              >
+                <Terminal className="w-3.5 h-3.5" />
+                <span>LOG (PDF)</span>
+              </MagneticButton>
             </a>
 
-            <button
+            <MagneticButton
+              strength={0.2}
               onClick={() => handleNavClick('#contact')}
               className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-stellar-cyan text-void text-xs font-mono font-bold tracking-wider hover:bg-stellar-glow transition-all shadow-stellar-sm"
             >
               <Radio className="w-3 h-3 text-void" />
               <span>TRANSMIT</span>
-            </button>
+            </MagneticButton>
 
             {/* Mobile Menu Button */}
             <button

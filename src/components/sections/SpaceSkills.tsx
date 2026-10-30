@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, Sparkles, Orbit, Terminal, Shield, Zap } from 'lucide-react';
 import { SKILLS, SKILL_CATEGORIES } from '@/data';
+import SpotlightTiltCard from '@/components/ui/SpotlightTiltCard';
 
 export default function SpaceSkills() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -31,7 +32,7 @@ export default function SpaceSkills() {
 
           <h2 className="font-cinematic text-3xl sm:text-5xl font-extrabold tracking-tight text-starlight leading-tight">
             CONSTELLATION OF <br />
-            <span className="gradient-stellar">CAPABILITIES</span>
+            <span className="shimmer-text">CAPABILITIES</span>
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-stardust mt-4 tracking-wide max-w-xl mx-auto">
@@ -63,21 +64,19 @@ export default function SpaceSkills() {
           ))}
         </div>
 
-        {/* Skills Star Grid */}
+        {/* Skills Star Grid with 3D Spotlight Tilt */}
         <motion.div
           layout
           className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
         >
           <AnimatePresence>
             {filteredSkills.map((skill, i) => (
-              <motion.div
+              <SpotlightTiltCard
                 key={skill.name}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.35, delay: i * 0.02 }}
-                className="cosmic-hud cosmic-hud-hover p-4 sm:p-5 rounded-2xl flex flex-col justify-between group relative overflow-hidden"
+                tiltIntensity={6}
+                spotlightColor="rgba(0, 212, 255, 0.14)"
+                showCrosshairs={false}
+                className="cosmic-hud p-4 sm:p-5 rounded-2xl flex flex-col justify-between group relative overflow-hidden border border-white/10"
               >
                 {/* Orbital Progress Background Glow */}
                 <div
@@ -119,7 +118,7 @@ export default function SpaceSkills() {
                     }}
                   />
                 </div>
-              </motion.div>
+              </SpotlightTiltCard>
             ))}
           </AnimatePresence>
         </motion.div>

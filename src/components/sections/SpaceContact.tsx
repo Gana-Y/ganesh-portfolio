@@ -8,6 +8,9 @@ import { z } from 'zod';
 import { toast } from 'sonner';
 import { Mail, Phone, Github, Linkedin, Twitter, Send, MapPin, Radio, Terminal, CheckCircle2 } from 'lucide-react';
 import { PERSONAL_INFO } from '@/data';
+import SpotlightTiltCard from '@/components/ui/SpotlightTiltCard';
+import BorderBeam from '@/components/ui/BorderBeam';
+import MagneticButton from '@/components/ui/MagneticButton';
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -95,7 +98,7 @@ export default function SpaceContact() {
 
           <h2 className="font-cinematic text-3xl sm:text-5xl font-extrabold tracking-tight text-starlight leading-tight">
             INITIATE COMM LINK &amp; <br />
-            <span className="gradient-stellar">COLLABORATION</span>
+            <span className="shimmer-text">COLLABORATION</span>
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-stardust mt-4 tracking-wide max-w-xl mx-auto">
@@ -124,30 +127,40 @@ export default function SpaceContact() {
                   href={ch.href}
                   target={ch.href.startsWith('http') ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl cosmic-hud cosmic-hud-hover group"
+                  className="block"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-stellar-cyan/10 border border-stellar-cyan/30 flex items-center justify-center text-stellar-cyan group-hover:scale-110 transition-transform">
-                    <ch.icon className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] font-mono text-stardust uppercase tracking-wider">
-                      {ch.label}
+                  <SpotlightTiltCard
+                    tiltIntensity={5}
+                    spotlightColor="rgba(0, 212, 255, 0.15)"
+                    showCrosshairs={false}
+                    className="flex flex-row items-center gap-4 p-4 rounded-xl cosmic-hud border border-white/10 group cursor-pointer"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-stellar-cyan/10 border border-stellar-cyan/30 flex items-center justify-center text-stellar-cyan group-hover:scale-110 transition-transform shrink-0">
+                      <ch.icon className="w-4 h-4" />
                     </div>
-                    <div className="text-xs sm:text-sm font-mono text-starlight group-hover:text-stellar-cyan transition-colors">
-                      {ch.value}
+                    <div>
+                      <div className="text-[10px] font-mono text-stardust uppercase tracking-wider">
+                        {ch.label}
+                      </div>
+                      <div className="text-xs sm:text-sm font-mono text-starlight group-hover:text-stellar-cyan transition-colors">
+                        {ch.value}
+                      </div>
                     </div>
-                  </div>
+                  </SpotlightTiltCard>
                 </a>
               ))}
             </div>
           </div>
 
           {/* RIGHT: Transmission Input Console */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 relative">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="cosmic-hud p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 space-y-5 shadow-2xl relative"
+              className="cosmic-hud p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 space-y-5 shadow-2xl relative overflow-hidden group"
             >
+              {/* Luminous Starlight Border Beam */}
+              <BorderBeam duration={12} colorFrom="#00d4ff" colorTo="#38bdf8" />
+
               <div className="flex items-center justify-between pb-3 border-b border-white/5">
                 <span className="text-xs font-mono tracking-widest text-stellar-cyan uppercase flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
@@ -216,8 +229,9 @@ export default function SpaceContact() {
                 )}
               </div>
 
-              <button
+              <MagneticButton
                 type="submit"
+                strength={0.15}
                 disabled={transmitting}
                 className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-stellar-cyan text-void text-xs font-mono font-bold tracking-wider hover:bg-stellar-glow transition-all shadow-stellar-sm disabled:opacity-50"
               >
@@ -229,7 +243,7 @@ export default function SpaceContact() {
                     <span>DISPATCH TRANSMISSION</span>
                   </>
                 )}
-              </button>
+              </MagneticButton>
             </form>
           </div>
 

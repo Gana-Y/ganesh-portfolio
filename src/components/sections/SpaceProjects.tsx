@@ -5,16 +5,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, Sparkles, Terminal, Cpu, Database, Eye, ChevronRight, Layers } from 'lucide-react';
 import { PROJECTS } from '@/data';
 import { Project } from '@/types';
+import SpotlightTiltCard from '@/components/ui/SpotlightTiltCard';
+import BorderBeam from '@/components/ui/BorderBeam';
+import MagneticButton from '@/components/ui/MagneticButton';
 
 function MissionCard({ project, index }: { project: Project; index: number }) {
   const [unveiled, setUnveiled] = useState(false);
 
   return (
-    <div
-      className="cosmic-hud cosmic-hud-hover rounded-2xl sm:rounded-3xl overflow-hidden flex flex-col group relative border border-white/10"
+    <SpotlightTiltCard
+      tiltIntensity={7}
+      spotlightColor="rgba(0, 212, 255, 0.18)"
+      showCrosshairs={true}
+      className="cosmic-hud rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 flex flex-col justify-between"
       onMouseEnter={() => setUnveiled(true)}
       onMouseLeave={() => setUnveiled(false)}
     >
+      {/* Luminous Border Beam on Flagship Projects */}
+      {project.featured && index < 2 && (
+        <BorderBeam duration={14} colorFrom="#00d4ff" colorTo="#38bdf8" />
+      )}
+
       {/* Visual Header / Simulation Window */}
       <div className="relative h-56 sm:h-64 overflow-hidden bg-void/90">
         {/* Background Image / Video for Flagship */}
@@ -36,7 +47,7 @@ function MissionCard({ project, index }: { project: Project; index: number }) {
         {/* Ambient Dark Scrims */}
         <div className="absolute inset-0 bg-gradient-to-t from-cosmos via-transparent to-black/60 pointer-events-none" />
 
-        {/* Creative "Car Video" Unveil Veil: Luminous Shroud that pulls back on hover */}
+        {/* Creative Unveil Veil: Luminous Shroud that pulls back on hover */}
         <motion.div
           initial={{ opacity: 0.85 }}
           animate={{
@@ -134,7 +145,7 @@ function MissionCard({ project, index }: { project: Project; index: number }) {
           )}
         </div>
       </div>
-    </div>
+    </SpotlightTiltCard>
   );
 }
 
@@ -163,13 +174,13 @@ export default function SpaceProjects() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full cosmic-pill mb-4 text-xs font-mono text-stellar-cyan">
-            <Layers className="w-3.5 h-3.5 text-stellar-cyan" />
+            <Layers className="w-3.5 h-3.5 text-stellar-cyan animate-pulse" />
             <span>SECTOR_03 // STELLAR MISSIONS</span>
           </div>
 
           <h2 className="font-cinematic text-3xl sm:text-5xl font-extrabold tracking-tight text-starlight leading-tight">
             PRODUCTION SYSTEMS &amp; <br />
-            <span className="gradient-stellar">NEURAL BUILDS</span>
+            <span className="shimmer-text">NEURAL BUILDS</span>
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-stardust mt-4 tracking-wide max-w-xl mx-auto">
@@ -184,25 +195,27 @@ export default function SpaceProjects() {
           ))}
         </div>
 
-        {/* Mission Expansion Controls */}
+        {/* Mission Expansion Controls with Magnetic Physics */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           {!showAll && PROJECTS.length > 4 && (
-            <button
+            <MagneticButton
               onClick={() => setShowAll(true)}
               className="px-8 py-3.5 rounded-full cosmic-pill text-xs font-mono tracking-wider text-starlight hover:text-stellar-cyan transition-all"
             >
               EXPAND ALL MISSIONS ({PROJECTS.length})
-            </button>
+            </MagneticButton>
           )}
 
           <a
             href="https://github.com/Gana-Y"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-stellar-cyan text-void text-xs font-mono font-bold tracking-wider hover:bg-stellar-glow transition-all shadow-stellar-sm"
+            className="inline-block"
           >
-            <Github className="w-4 h-4 text-void" />
-            <span>VIEW GITHUB REPOSITORY</span>
+            <MagneticButton className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-stellar-cyan text-void text-xs font-mono font-bold tracking-wider hover:bg-stellar-glow transition-all shadow-stellar-sm">
+              <Github className="w-4 h-4 text-void" />
+              <span>VIEW GITHUB REPOSITORY</span>
+            </MagneticButton>
           </a>
         </div>
 

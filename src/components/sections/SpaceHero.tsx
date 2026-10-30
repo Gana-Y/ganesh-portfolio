@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ArrowDown, Terminal, Eye, Zap, Shield, Cpu, Video } from 'lucide-react';
 import { PERSONAL_INFO } from '@/data';
+import BorderBeam from '@/components/ui/BorderBeam';
+import MagneticButton from '@/components/ui/MagneticButton';
 
 const TELEMETRY = [
   { label: 'MATCH ENGINE', value: '136K', unit: 'ops/s', sub: 'O(1) Heap Index' },
@@ -78,6 +80,8 @@ export default function SpaceHero() {
           >
             {/* Outer HUD Framing Container */}
             <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border border-stellar-cyan/30 bg-cosmos/80 shadow-stellar-md group">
+              {/* Luminous Starlight Border Beam */}
+              <BorderBeam duration={9} colorFrom="#00d4ff" colorTo="#38bdf8" />
               
               {/* Dedicated Live Blinking Video Feed */}
               <video
@@ -181,7 +185,7 @@ export default function SpaceHero() {
               </p>
               <h1 className="font-cinematic text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-starlight leading-[1.05]">
                 GANESH
-                <span className="block text-3xl sm:text-4xl lg:text-5xl gradient-stellar mt-1">
+                <span className="block text-3xl sm:text-4xl lg:text-5xl shimmer-text mt-1">
                   YANDIGERI
                 </span>
               </h1>
@@ -217,8 +221,12 @@ export default function SpaceHero() {
               </AnimatePresence>
             </div>
 
-            {/* Verified Mission Telemetry Grid */}
-            <div className="grid grid-cols-3 gap-2 p-3 rounded-xl cosmic-hud border border-white/10">
+            {/* Verified Mission Telemetry Grid with Corner HUD Markers */}
+            <div className="relative grid grid-cols-3 gap-2 p-3 rounded-xl cosmic-hud border border-white/10 group">
+              <span className="hud-corner-bracket top-1 left-1 border-t border-l" />
+              <span className="hud-corner-bracket top-1 right-1 border-t border-r" />
+              <span className="hud-corner-bracket bottom-1 left-1 border-b border-l" />
+              <span className="hud-corner-bracket bottom-1 right-1 border-b border-r" />
               {TELEMETRY.map((item) => (
                 <div key={item.label} className="text-center">
                   <div className="text-[9px] font-mono text-stardust uppercase tracking-wider">
@@ -235,23 +243,23 @@ export default function SpaceHero() {
               ))}
             </div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons with Tactile Magnetic Attraction */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button
+              <MagneticButton
                 onClick={() => handleScroll('projects')}
                 className="flex items-center gap-2 px-6 py-3 rounded-full bg-stellar-cyan text-void text-xs font-mono font-bold tracking-wider hover:bg-stellar-glow transition-all shadow-stellar-sm"
               >
                 <span>EXPLORE MISSIONS</span>
                 <ChevronRight className="w-3.5 h-3.5 text-void" />
-              </button>
+              </MagneticButton>
 
-              <button
+              <MagneticButton
                 onClick={() => handleScroll('about')}
                 className="flex items-center gap-2 px-5 py-3 rounded-full cosmic-pill text-xs font-mono text-starlight hover:text-stellar-cyan"
               >
                 <span>ENTER PORTAL</span>
                 <span className="text-stellar-cyan">→</span>
-              </button>
+              </MagneticButton>
             </div>
           </motion.div>
 
