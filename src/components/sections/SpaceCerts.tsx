@@ -21,14 +21,24 @@ import SpotlightTiltCard from '@/components/ui/SpotlightTiltCard';
 export default function SpaceCerts() {
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
 
-  // Close modal on Escape key
+  // Close modal on Escape key & lock background scroll
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelectedCert(null);
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+
+    if (selectedCert) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedCert]);
 
   return (
     <section id="certifications" className="relative min-h-screen py-24 sm:py-32 overflow-hidden bg-void">
@@ -124,11 +134,30 @@ export default function SpaceCerts() {
               </div>
 
               {/* Action Trigger */}
-              <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between text-xs font-mono">
-                <span className="text-[10px] text-stellar-cyan flex items-center gap-1">
-                  <span>VIEW CREDENTIAL</span>
-                </span>
-                <span className="text-stellar-cyan group-hover:translate-x-1 transition-transform">→</span>
+              <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between gap-2 text-xs font-mono">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedCert(cert);
+                  }}
+                  className="px-3 py-1.5 rounded-lg bg-stellar-cyan/15 hover:bg-stellar-cyan text-stellar-cyan hover:text-void border border-stellar-cyan/40 text-[11px] font-mono font-bold flex items-center gap-1.5 transition-all shadow-stellar-sm"
+                >
+                  <Eye className="w-3.5 h-3.5" />
+                  <span>VIEW CERTIFICATE</span>
+                </button>
+                {cert.pdfUrl && (
+                  <a
+                    href={cert.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-stardust hover:text-starlight border border-white/10 transition-colors"
+                    title="Open PDF directly"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-stellar-cyan" />
+                  </a>
+                )}
               </div>
             </SpotlightTiltCard>
           ))}
@@ -141,14 +170,14 @@ export default function SpaceCerts() {
       {/* ============================================================== */}
       <AnimatePresence>
         {selectedCert && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6">
+          <div className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-6">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedCert(null)}
-              className="absolute inset-0 bg-void/85 backdrop-blur-md"
+              className="absolute inset-0 bg-void/90 backdrop-blur-md"
             />
 
             {/* Modal Dialog */}

@@ -207,13 +207,24 @@ export default function SpaceProjects() {
   const displayed = showAll ? PROJECTS : PROJECTS.slice(0, 4);
 
   // Close modal on Escape key
+  // Close modal on Escape key & lock background scroll
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelectedProject(null);
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedProject]);
 
   return (
     <section id="projects" className="relative min-h-screen py-24 sm:py-32 overflow-hidden bg-void">
@@ -293,14 +304,14 @@ export default function SpaceProjects() {
       {/* ============================================================== */}
       <AnimatePresence>
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6">
+          <div className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-6">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-void/85 backdrop-blur-md"
+              className="absolute inset-0 bg-void/90 backdrop-blur-md"
             />
 
             {/* Modal Dialog */}
