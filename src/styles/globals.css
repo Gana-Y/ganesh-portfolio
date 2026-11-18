@@ -1,28 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-cinematic: 'Cinzel', serif;
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  --color-void: #020205;
-  --color-abyss: #030308;
-  --color-cosmos: #070b16;
-  --color-nebula: #0b1329;
-  
-  --stellar-cyan: #00d4ff;
-  --stellar-glow: #38bdf8;
-  --stellar-deep: #0369a1;
-  --plasma-amber: #f59e0b;
-  --plasma-orange: #ff6b35;
+  --bg-deep: #07080d;
+  --bg-canvas: #0b0d14;
+  --bg-surface: #11141c;
+  --bg-raised: #1a1e28;
 
-  --starlight: #f0f6fc;
-  --stardust: #94a3b8;
+  --text-primary: #eef0f5;
+  --text-secondary: #a3a9b8;
+  --text-muted: #7a8296;
+
+  --accent: #2dd4bf;
+  --live: #4cc38a;
+  --danger: #e5484d;
+  --hairline: rgba(238, 240, 245, 0.08);
 }
 
 * {
@@ -33,11 +31,13 @@
 
 html {
   overflow-x: hidden;
-  background-color: var(--color-void);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
 }
 
-/* Lenis Smooth Inertial Scroll Styles */
-html.lenis, html.lenis body {
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -57,225 +57,46 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-.will-change-transform {
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
 body {
-  background-color: var(--color-void);
-  color: var(--starlight);
-  font-family: var(--font-body);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar */
+/* Quiet scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--color-void);
+  background: var(--bg-deep);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00d4ff, #1d4ed8);
-  border-radius: 9999px;
+  background: rgba(238, 240, 245, 0.14);
+  border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: rgba(238, 240, 245, 0.24);
 }
 
 /* Selection */
 ::selection {
-  background: rgba(0, 212, 255, 0.3);
-  color: #f0f6fc;
+  background: rgba(45, 212, 191, 0.22);
+  color: var(--text-primary);
 }
 
-/* Cosmic Glass HUD */
-.cosmic-hud {
-  background: linear-gradient(
-    145deg,
-    rgba(11, 19, 41, 0.72) 0%,
-    rgba(7, 11, 22, 0.88) 100%
-  );
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(0, 212, 255, 0.16);
-  box-shadow: 
-    0 20px 50px rgba(0, 0, 0, 0.8),
-    inset 0 1px 1px rgba(255, 255, 255, 0.12),
-    inset 0 0 20px rgba(0, 212, 255, 0.05);
+/* Keyboard focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-.cosmic-hud-hover {
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.cosmic-hud-hover:hover {
-  border-color: rgba(0, 212, 255, 0.45);
-  box-shadow: 
-    0 24px 60px rgba(0, 0, 0, 0.9),
-    0 0 35px rgba(0, 212, 255, 0.22),
-    inset 0 1px 2px rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px);
-}
-
-/* Luminous Cosmic Ring Portal (Inspired by Image 1 & 3) */
-.luminous-portal-ring {
-  position: relative;
-  border-radius: 50%;
-  box-shadow: 
-    0 0 40px rgba(0, 212, 255, 0.6),
-    0 0 90px rgba(0, 212, 255, 0.3),
-    inset 0 0 50px rgba(0, 212, 255, 0.4);
-}
-
-.luminous-portal-ring::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  padding: 2px;
-  background: conic-gradient(from 0deg, #00d4ff, #38bdf8, #1e40af, #00d4ff);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: ringSpin 18s linear infinite;
-}
-
-/* Eye Iris Glow effect */
-.eye-iris-ring {
-  border: 2px solid rgba(0, 212, 255, 0.7);
-  border-radius: 50%;
-  box-shadow:
-    0 0 25px rgba(0, 212, 255, 0.8),
-    0 0 60px rgba(0, 212, 255, 0.4),
-    inset 0 0 25px rgba(0, 212, 255, 0.6);
-  animation: irisGlow 3s ease-in-out infinite;
-}
-
-/* Cinematic Typography Utilities */
-.cinematic-title {
-  font-family: var(--font-cinematic);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.cinematic-glow {
-  text-shadow: 0 0 25px rgba(0, 212, 255, 0.5), 0 0 60px rgba(0, 212, 255, 0.2);
-}
-
-.gradient-stellar {
-  background: linear-gradient(135deg, #f0f6fc 0%, #38bdf8 50%, #00d4ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.gradient-nebula {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Cosmic Pill */
-.cosmic-pill {
-  background: rgba(11, 19, 41, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.cosmic-pill:hover {
-  background: rgba(0, 212, 255, 0.12);
-  border-color: rgba(0, 212, 255, 0.5);
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
-}
-
-/* Dark Water Reflection (Inspired by Image 3) */
-.water-reflection {
-  position: relative;
-}
-.water-reflection::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
-  background: linear-gradient(to top, rgba(2, 2, 5, 0.95), transparent);
-  pointer-events: none;
-}
-
-/* Keyframes */
-@keyframes ringSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes irisGlow {
-  0%, 100% {
-    filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.4));
-  }
-  50% {
-    filter: drop-shadow(0 0 40px rgba(0, 212, 255, 0.85));
-  }
-}
-
-/* Shimmer Typography Effect */
-.shimmer-text {
-  background: linear-gradient(
-    90deg,
-    #f0f6fc 0%,
-    #f0f6fc 35%,
-    #38bdf8 50%,
-    #00d4ff 65%,
-    #f0f6fc 85%,
-    #f0f6fc 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: textShimmer 6s ease-in-out infinite;
-}
-
-@keyframes textShimmer {
-  0% {
-    background-position: 200% center;
-  }
-  100% {
-    background-position: -200% center;
-  }
-}
-
-/* Sci-fi HUD crosshair decorative helper */
-.hud-corner-bracket {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-color: rgba(0, 212, 255, 0.4);
-  pointer-events: none;
-  transition: border-color 0.3s ease;
-}
-.group:hover .hud-corner-bracket {
-  border-color: rgba(0, 212, 255, 0.9);
-}
-
-/* Glass Refraction Card helper */
-.glass-panel {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(11, 19, 41, 0.6) 40%,
-    rgba(7, 11, 22, 0.85) 100%
-  );
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 15px 35px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+/* Subtle top edge highlight for dark raised controls (no glow) */
+.control-highlight {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }

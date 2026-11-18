@@ -1,15 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Compass, Menu, X, Terminal, Radio } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { NAV_LINKS } from '@/data';
 import { useScrolled, useActiveSection } from '@/hooks';
-import MagneticButton from '@/components/ui/MagneticButton';
 
 export default function SpaceNav() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const scrolled = useScrolled(40);
+  const scrolled = useScrolled(24);
   const sectionIds = NAV_LINKS.map((l) => l.href.replace('#', ''));
   const activeSection = useActiveSection(sectionIds);
 
@@ -23,153 +21,123 @@ export default function SpaceNav() {
 
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
-    const lenis = (window as any).__lenis;
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (el: HTMLElement | number, opts?: object) => void } }).__lenis;
     const el = document.querySelector(href);
     if (lenis && el) {
-      lenis.scrollTo(el as HTMLElement, { offset: -70, duration: 1.2 });
+      lenis.scrollTo(el as HTMLElement, { offset: -64, duration: 0.9 });
     } else if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
+  const scrollToTop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (target: number, opts?: object) => void } }).__lenis;
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 0.9 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <>
-      <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 pt-4 sm:pt-6 pointer-events-none"
-      >
-        <div
-          className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl px-4 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-500 ${
-            scrolled
-              ? 'cosmic-hud bg-void/80 border-stellar-cyan/30 shadow-stellar-sm'
-              : 'bg-void/40 backdrop-blur-md border border-white/10'
-          }`}
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 h-16 transition-[background-color,border-color] duration-150 ease-unslop ${
+        scrolled
+          ? 'bg-canvas/90 backdrop-blur-md border-b border-hairline'
+          : 'bg-canvas/70 backdrop-blur-sm border-b border-transparent'
+      }`}
+    >
+      <div className="max-w-6xl mx-auto h-full px-6 flex items-center justify-between gap-6">
+        {/* Wordmark */}
+        <a
+          href="#"
+          onClick={scrollToTop}
+          className="text-base font-medium tracking-[-0.01em] text-primary hover:text-accent transition-colors duration-150 ease-unslop shrink-0"
         >
-          {/* Logo / Coordinates */}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              const lenis = (window as any).__lenis;
-              if (lenis) {
-                lenis.scrollTo(0, { duration: 1.2 });
-              } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            }}
-            className="flex items-center gap-2.5 group"
-          >
-            <div className="relative w-7 h-7 rounded-full bg-stellar-cyan/10 border border-stellar-cyan/40 flex items-center justify-center group-hover:border-stellar-cyan transition-colors">
-              <Compass className="w-4 h-4 text-stellar-cyan animate-pulse" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-cinematic font-bold text-sm tracking-wider text-starlight group-hover:text-stellar-cyan transition-colors">
-                GANESH<span className="text-stellar-cyan">.</span>
-              </span>
-              <span className="text-[9px] font-mono tracking-widest text-stardust -mt-0.5 hidden sm:block">
-                SYS::ONLINE
-              </span>
-            </div>
-          </a>
+          Ganesh Yandigeri
+        </a>
 
-          {/* Desktop Nav Items */}
-          <nav className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.href.replace('#', '');
-              return (
-                <button
-                  key={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className={`relative px-3.5 py-1.5 text-xs font-mono tracking-wider uppercase transition-colors rounded-full ${
-                    isActive
-                      ? 'text-stellar-cyan font-semibold'
-                      : 'text-stardust hover:text-starlight'
-                  }`}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="space-nav-pill"
-                      className="absolute inset-0 rounded-full bg-stellar-cyan/15 border border-stellar-cyan/40 shadow-stellar-sm"
-                      transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-                    />
-                  )}
-                  <span className="relative z-10 flex items-center gap-1.5">
-                    {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-stellar-cyan animate-ping" />
-                    )}
-                    {link.label}
-                  </span>
-                </button>
-              );
-            })}
-          </nav>
-
-          {/* Right Action: Transmission CTA & Mobile menu toggle */}
-          <div className="flex items-center gap-2">
-            <a
-              href="/resume.pdf"
-              download="Ganesh_Yandigeri_Resume.pdf"
-              className="hidden sm:inline-block"
-            >
-              <MagneticButton
-                strength={0.18}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full cosmic-pill text-xs font-mono text-stellar-cyan hover:text-white"
+        {/* Desktop navigation */}
+        <nav aria-label="Primary" className="hidden md:flex items-center gap-1">
+          {NAV_LINKS.map((link) => {
+            const isActive = activeSection === link.href.replace('#', '');
+            return (
+              <button
+                key={link.href}
+                type="button"
+                onClick={() => handleNavClick(link.href)}
+                className={`h-8 px-3 rounded-lg text-sm font-normal transition-[background-color,color] duration-150 ease-unslop ${
+                  isActive
+                    ? 'bg-raised text-primary font-medium'
+                    : 'text-secondary hover:text-primary hover:bg-surface'
+                }`}
               >
-                <Terminal className="w-3.5 h-3.5" />
-                <span>LOG (PDF)</span>
-              </MagneticButton>
-            </a>
+                {link.label}
+              </button>
+            );
+          })}
+        </nav>
 
-            <MagneticButton
-              strength={0.2}
-              onClick={() => handleNavClick('#contact')}
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-stellar-cyan text-void text-xs font-mono font-bold tracking-wider hover:bg-stellar-glow transition-all shadow-stellar-sm"
-            >
-              <Radio className="w-3 h-3 text-void" />
-              <span>TRANSMIT</span>
-            </MagneticButton>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden p-2 rounded-full text-starlight hover:text-stellar-cyan"
-              aria-label="Toggle Navigation Menu"
-            >
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-      </motion.header>
-
-      {/* Mobile Menu Dropdown */}
-      {menuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="fixed inset-x-4 top-20 z-40 p-6 rounded-2xl cosmic-hud md:hidden flex flex-col gap-3 shadow-2xl"
-        >
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNavClick(link.href)}
-              className="flex items-center justify-between text-left py-2 text-sm font-mono uppercase text-starlight hover:text-stellar-cyan border-b border-white/5"
-            >
-              <span>{link.label}</span>
-              <span className="text-xs text-stellar-cyan">→</span>
-            </button>
-          ))}
+        {/* Actions: quiet resume link + single primary button */}
+        <div className="flex items-center gap-4">
           <a
             href="/resume.pdf"
             download="Ganesh_Yandigeri_Resume.pdf"
-            className="text-center py-2 text-xs font-mono text-stellar-cyan border border-stellar-cyan/30 rounded-xl mt-2"
+            className="hidden sm:inline-block text-sm text-secondary hover:text-primary transition-colors duration-150 ease-unslop"
           >
-            DOWNLOAD RESUME (PDF)
+            Resume
           </a>
-        </motion.div>
+
+          <button
+            type="button"
+            onClick={() => handleNavClick('#contact')}
+            className="h-9 px-4 rounded-lg bg-primary text-canvas text-sm font-medium hover:bg-primary/90 active:scale-[0.98] transition-[background-color,transform] duration-150 ease-unslop"
+          >
+            Get in touch
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden h-9 w-9 rounded-lg flex items-center justify-center text-secondary hover:text-primary hover:bg-surface transition-colors duration-150 ease-unslop"
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <X className="w-[18px] h-[18px]" strokeWidth={1.5} /> : <Menu className="w-[18px] h-[18px]" strokeWidth={1.5} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-surface border-b border-hairline px-6 py-4 flex flex-col gap-1">
+          {NAV_LINKS.map((link) => {
+            const isActive = activeSection === link.href.replace('#', '');
+            return (
+              <button
+                key={link.href}
+                type="button"
+                onClick={() => handleNavClick(link.href)}
+                className={`h-10 px-3 rounded-lg text-left text-sm transition-colors duration-150 ease-unslop ${
+                  isActive
+                    ? 'bg-raised text-primary font-medium'
+                    : 'text-secondary hover:text-primary'
+                }`}
+              >
+                {link.label}
+              </button>
+            );
+          })}
+          <a
+            href="/resume.pdf"
+            download="Ganesh_Yandigeri_Resume.pdf"
+            className="h-10 px-3 mt-2 rounded-lg border border-hairline flex items-center justify-center text-sm text-primary hover:bg-raised transition-colors duration-150 ease-unslop"
+          >
+            Download resume (PDF)
+          </a>
+        </div>
       )}
-    </>
+    </header>
   );
 }

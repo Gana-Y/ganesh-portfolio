@@ -4,24 +4,30 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Award,
+  Cpu,
+  Briefcase,
+  Code2,
   ExternalLink,
   FileText,
-  CheckCircle2,
-  ShieldCheck,
   X,
   Download,
-  Eye,
-  Sparkles,
-  Maximize2,
+  type LucideIcon,
 } from 'lucide-react';
 import { CERTIFICATIONS } from '@/data';
 import { Certification } from '@/types';
-import SpotlightTiltCard from '@/components/ui/SpotlightTiltCard';
+
+const CERT_ICONS: Record<string, LucideIcon> = {
+  award: Award,
+  cpu: Cpu,
+  briefcase: Briefcase,
+  code: Code2,
+};
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function SpaceCerts() {
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
 
-  // Close modal on Escape key & lock background scroll
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelectedCert(null);
@@ -41,222 +47,194 @@ export default function SpaceCerts() {
   }, [selectedCert]);
 
   return (
-    <section id="certifications" className="relative min-h-screen py-24 sm:py-32 overflow-hidden bg-void">
-      {/* Background Ambience */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-10 left-1/4 w-[50vw] h-[50vw] rounded-full bg-blue-900/10 blur-[160px]" />
-        <div className="absolute top-1/4 right-1/4 w-[40vw] h-[40vw] rounded-full bg-stellar-cyan/5 blur-[180px]" />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full cosmic-pill mb-4 text-xs font-mono text-stellar-cyan">
-            <Award className="w-3.5 h-3.5 text-stellar-cyan animate-pulse" />
-            <span>SECTOR_05 // ACCREDITED MISSIONS</span>
-          </div>
-
-          <h2 className="font-cinematic text-3xl sm:text-5xl font-extrabold tracking-tight text-starlight leading-tight">
-            ORBITAL CREDENTIALS &amp; <br />
-            <span className="shimmer-text">CERTIFICATIONS</span>
-          </h2>
-
-          <p className="font-mono text-xs sm:text-sm text-stardust mt-4 tracking-wide max-w-xl mx-auto">
-            Rigorous enterprise accreditations in Generative AI, cloud infrastructure, and software engineering. Click any credential to inspect.
+    <section id="certifications" className="py-20 sm:py-24 bg-canvas border-t border-hairline">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.38, ease: EASE }}
+          className="max-w-2xl mb-12"
+        >
+          <p className="font-mono text-xs text-muted tracking-[0.01em] mb-3">
+            Certifications
           </p>
-        </div>
+          <h2 className="text-3xl sm:text-4xl font-medium tracking-[-0.02em] leading-[1.15] text-primary">
+            Verified credentials
+          </h2>
+          <p className="text-sm text-secondary mt-3">
+            Select any credential to inspect the full certificate, competency list, or original PDF.
+          </p>
+        </motion.div>
 
-        {/* Credentials Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {CERTIFICATIONS.map((cert) => (
-            <SpotlightTiltCard
-              key={cert.id}
-              tiltIntensity={8}
-              spotlightColor="rgba(0, 212, 255, 0.18)"
-              showCrosshairs={true}
-              onClick={() => setSelectedCert(cert)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  setSelectedCert(cert);
-                }
-              }}
-              className="cosmic-hud p-5 sm:p-6 rounded-2xl flex flex-col justify-between group relative overflow-hidden cursor-pointer text-left border border-white/10"
-            >
-              <div>
-                {/* Header Icon & Status Beacon */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-stellar-cyan/10 border border-stellar-cyan/30 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                    {cert.icon}
-                  </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-mono text-emerald-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>VERIFIED</span>
-                  </div>
-                </div>
-
-                {/* Certificate Preview Thumbnail */}
-                {cert.previewUrl && (
-                  <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-4 border border-white/10 bg-cosmos group-hover:border-stellar-cyan/40 transition-colors">
-                    <img
-                      src={cert.previewUrl}
-                      alt={cert.title}
-                      className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-void/90 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-void/50 backdrop-blur-xs">
-                      <div className="px-3 py-1.5 rounded-full bg-stellar-cyan text-void text-[11px] font-mono font-bold flex items-center gap-1.5 shadow-stellar-sm">
-                        <Eye className="w-3.5 h-3.5" />
-                        <span>INSPECT</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Title */}
-                <h3 className="font-cinematic font-bold text-sm sm:text-base text-starlight mb-1.5 leading-snug group-hover:text-stellar-cyan transition-colors line-clamp-2">
-                  {cert.title}
-                </h3>
-
-                {/* Issuer */}
-                <p className="text-xs font-mono text-stardust mb-3">
-                  {cert.issuer}
-                </p>
-
-                {/* Date */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-[10px] font-mono text-starlight/80">
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                  <span>{cert.date}</span>
-                </div>
-              </div>
-
-              {/* Action Trigger */}
-              <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between gap-2 text-xs font-mono">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
+        {/* Credentials grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {CERTIFICATIONS.map((cert) => {
+            const IconComponent = CERT_ICONS[cert.icon] || Award;
+            return (
+              <div
+                key={cert.id}
+                onClick={() => setSelectedCert(cert)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
                     setSelectedCert(cert);
-                  }}
-                  className="px-3 py-1.5 rounded-lg bg-stellar-cyan/15 hover:bg-stellar-cyan text-stellar-cyan hover:text-void border border-stellar-cyan/40 text-[11px] font-mono font-bold flex items-center gap-1.5 transition-all shadow-stellar-sm"
-                >
-                  <Eye className="w-3.5 h-3.5" />
-                  <span>VIEW CERTIFICATE</span>
-                </button>
-                {cert.pdfUrl && (
-                  <a
-                    href={cert.pdfUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-stardust hover:text-starlight border border-white/10 transition-colors"
-                    title="Open PDF directly"
-                  >
-                    <FileText className="w-3.5 h-3.5 text-stellar-cyan" />
-                  </a>
-                )}
-              </div>
-            </SpotlightTiltCard>
-          ))}
-        </div>
+                  }
+                }}
+                className="p-5 rounded-2xl bg-surface border border-hairline hover:border-hairline-strong transition-colors duration-150 ease-unslop flex flex-col justify-between cursor-pointer text-left"
+              >
+                <div>
+                  {/* Top row: icon and issue date */}
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-raised border border-hairline flex items-center justify-center text-muted">
+                      <IconComponent className="w-4 h-4" strokeWidth={1.5} />
+                    </div>
+                    <span className="font-mono text-xs text-muted tabular-nums">
+                      {cert.date}
+                    </span>
+                  </div>
 
+                  {/* Certificate preview thumbnail */}
+                  {cert.previewUrl && (
+                    <div className="w-full aspect-[16/10] rounded-lg overflow-hidden mb-4 border border-hairline bg-deep">
+                      <img
+                        src={cert.previewUrl}
+                        alt={cert.title}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    </div>
+                  )}
+
+                  {/* Title and issuer */}
+                  <h3 className="text-[15px] font-medium text-primary leading-snug line-clamp-2">
+                    {cert.title}
+                  </h3>
+                  <p className="text-xs text-muted mt-1.5">
+                    {cert.issuer}
+                  </p>
+                </div>
+
+                {/* Actions */}
+                <div className="mt-5 pt-4 border-t border-hairline flex items-center justify-between gap-2">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedCert(cert);
+                    }}
+                    className="h-8 px-3 rounded-lg bg-raised border border-hairline text-xs font-medium text-primary hover:border-hairline-strong transition-colors duration-150 ease-unslop"
+                  >
+                    View certificate
+                  </button>
+
+                  {cert.pdfUrl && (
+                    <a
+                      href={cert.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="w-8 h-8 rounded-lg bg-raised border border-hairline flex items-center justify-center text-muted hover:text-primary hover:border-hairline-strong transition-colors duration-150 ease-unslop"
+                      title="Open PDF directly"
+                      aria-label={`Open ${cert.title} PDF`}
+                    >
+                      <FileText className="w-4 h-4" strokeWidth={1.5} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* ============================================================== */}
-      {/* COSMIC HUD CREDENTIAL INSPECTOR MODAL                          */}
-      {/* ============================================================== */}
+      {/* Credential Inspector Modal */}
       <AnimatePresence>
         {selectedCert && (
-          <div className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-6">
-            {/* Backdrop */}
+          <div
+            className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cert-modal-title"
+          >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.18, ease: EASE }}
               onClick={() => setSelectedCert(null)}
-              className="absolute inset-0 bg-void/90 backdrop-blur-md"
+              className="absolute inset-0 bg-deep/85 backdrop-blur-sm"
             />
 
-            {/* Modal Dialog */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl cosmic-hud border border-stellar-cyan/40 bg-cosmos/95 p-5 sm:p-8 shadow-stellar-lg z-10 flex flex-col justify-between"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.22, ease: EASE }}
+              className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-2xl bg-surface border border-hairline-strong p-6 sm:p-8 z-10 flex flex-col gap-5"
             >
-              {/* Modal Header */}
-              <div className="flex items-start justify-between gap-4 pb-4 border-b border-white/10">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-stellar-cyan/15 border border-stellar-cyan/30 flex items-center justify-center text-3xl shrink-0">
-                    {selectedCert.icon}
+              {/* Header */}
+              <div className="flex items-start justify-between gap-4 pb-4 border-b border-hairline">
+                <div>
+                  <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-muted mb-1.5">
+                    <span>{selectedCert.issuer}</span>
+                    <span>·</span>
+                    <span>Issued {selectedCert.date}</span>
+                    {selectedCert.credentialId && (
+                      <>
+                        <span>·</span>
+                        <span>ID {selectedCert.credentialId}</span>
+                      </>
+                    )}
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] font-mono text-emerald-400 font-bold flex items-center gap-1">
-                        <ShieldCheck className="w-3 h-3" />
-                        <span>AUTHENTICATED CREDENTIAL</span>
-                      </span>
-                      <span className="text-[10px] font-mono text-stardust">
-                        ISSUED: {selectedCert.date}
-                      </span>
-                    </div>
-                    <h3 className="font-cinematic font-bold text-lg sm:text-2xl text-starlight leading-tight">
-                      {selectedCert.title}
-                    </h3>
-                    <p className="text-xs font-mono text-stellar-cyan mt-0.5">
-                      {selectedCert.issuer} {selectedCert.credentialId && `· ID: ${selectedCert.credentialId}`}
-                    </p>
-                  </div>
+                  <h3
+                    id="cert-modal-title"
+                    className="text-xl sm:text-2xl font-medium tracking-[-0.02em] text-primary leading-snug"
+                  >
+                    {selectedCert.title}
+                  </h3>
                 </div>
 
-                {/* Close Button */}
                 <button
+                  type="button"
                   onClick={() => setSelectedCert(null)}
-                  className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-stardust hover:text-white transition-colors shrink-0"
+                  className="w-9 h-9 rounded-lg bg-raised border border-hairline flex items-center justify-center text-secondary hover:text-primary hover:border-hairline-strong transition-colors duration-150 shrink-0"
                   aria-label="Close dialog"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" strokeWidth={1.5} />
                 </button>
               </div>
 
-              {/* Certificate Full Visual Preview */}
-              <div className="my-5 relative rounded-2xl overflow-hidden border border-stellar-cyan/30 bg-void/80 shadow-inner group">
+              {/* High-res certificate render */}
+              <div className="rounded-xl overflow-hidden border border-hairline bg-deep">
                 {selectedCert.previewUrl ? (
-                  <div className="relative w-full max-h-[55vh] flex justify-center bg-black/40 overflow-hidden">
+                  <div className="w-full max-h-[55vh] flex justify-center bg-deep">
                     <img
                       src={selectedCert.previewUrl}
                       alt={selectedCert.title}
-                      className="max-h-[55vh] w-auto object-contain mx-auto transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="max-h-[55vh] w-auto object-contain mx-auto"
                     />
                   </div>
                 ) : (
-                  <div className="py-20 text-center text-stardust font-mono text-xs">
-                    Preview rendered in vector format. Click &ldquo;Open Full PDF&rdquo; below to view.
+                  <div className="py-16 text-center text-muted text-sm">
+                    Open the PDF below to inspect this certificate.
                   </div>
                 )}
-
-                {/* Corner decorative anchors */}
-                <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-stellar-cyan pointer-events-none" />
-                <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-stellar-cyan pointer-events-none" />
-                <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-stellar-cyan pointer-events-none" />
-                <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-stellar-cyan pointer-events-none" />
               </div>
 
-              {/* Skills Tags */}
+              {/* Competencies */}
               {selectedCert.skills && selectedCert.skills.length > 0 && (
-                <div className="mb-5">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-stardust block mb-2">
-                    VALIDATED COMPETENCIES &amp; SKILLS:
+                <div>
+                  <span className="font-mono text-xs text-muted block mb-2">
+                    Validated skills
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {selectedCert.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono text-starlight"
+                        className="px-2.5 py-1 rounded-md bg-raised border border-hairline text-xs text-secondary"
                       >
                         {skill}
                       </span>
@@ -265,49 +243,42 @@ export default function SpaceCerts() {
                 </div>
               )}
 
-              {/* Action Footer Buttons */}
-              <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-                <div className="text-[11px] font-mono text-stardust flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                  <span>DIGITALLY SIGNED // SECURE FILE</span>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2">
-                  {selectedCert.pdfUrl && (
-                    <>
-                      <a
-                        href={selectedCert.pdfUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-stellar-cyan text-void text-xs font-mono font-bold hover:bg-stellar-glow transition-colors shadow-stellar-sm"
-                      >
-                        <FileText className="w-3.5 h-3.5" />
-                        <span>OPEN FULL PDF</span>
-                      </a>
-
-                      <a
-                        href={selectedCert.pdfUrl}
-                        download
-                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-starlight transition-colors"
-                      >
-                        <Download className="w-3.5 h-3.5" />
-                        <span>DOWNLOAD</span>
-                      </a>
-                    </>
-                  )}
-
-                  {selectedCert.credentialUrl && selectedCert.credentialUrl !== '#' && (
+              {/* Action footer */}
+              <div className="pt-4 border-t border-hairline flex flex-wrap items-center justify-end gap-2">
+                {selectedCert.pdfUrl && (
+                  <>
                     <a
-                      href={selectedCert.credentialUrl}
+                      href={selectedCert.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-stellar-cyan transition-colors"
+                      className="h-9 px-4 rounded-lg bg-primary text-canvas text-xs font-medium inline-flex items-center gap-1.5 hover:bg-primary/90 transition-colors duration-150"
                     >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      <span>VERIFY ONLINE</span>
+                      <FileText className="w-3.5 h-3.5" strokeWidth={1.5} />
+                      <span>Open full PDF</span>
                     </a>
-                  )}
-                </div>
+
+                    <a
+                      href={selectedCert.pdfUrl}
+                      download
+                      className="h-9 px-3.5 rounded-lg bg-raised border border-hairline text-xs font-medium text-primary inline-flex items-center gap-1.5 hover:border-hairline-strong transition-colors duration-150"
+                    >
+                      <Download className="w-3.5 h-3.5 text-muted" strokeWidth={1.5} />
+                      <span>Download</span>
+                    </a>
+                  </>
+                )}
+
+                {selectedCert.credentialUrl && selectedCert.credentialUrl !== '#' && (
+                  <a
+                    href={selectedCert.credentialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="h-9 px-3.5 rounded-lg bg-raised border border-hairline text-xs font-medium text-secondary hover:text-primary inline-flex items-center gap-1.5 hover:border-hairline-strong transition-colors duration-150"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5 text-muted" strokeWidth={1.5} />
+                    <span>Verify online</span>
+                  </a>
+                )}
               </div>
             </motion.div>
           </div>

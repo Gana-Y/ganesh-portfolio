@@ -7,22 +7,13 @@ import SpaceSkills from '@/components/sections/SpaceSkills';
 import SpaceCerts from '@/components/sections/SpaceCerts';
 import SpaceContact from '@/components/sections/SpaceContact';
 import SpaceFooter from '@/components/layout/SpaceFooter';
-import StarField from '@/components/ui/StarField';
 import ScrollProgress from '@/components/ui/ScrollProgress';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-void text-starlight overflow-hidden selection:bg-stellar-cyan/30 selection:text-starlight">
-      {/* Deep Space Interactive Background Layer */}
-      <StarField />
-      
-      {/* Tracking Line */}
+    <main className="relative min-h-screen bg-canvas text-primary overflow-x-hidden">
       <ScrollProgress />
-      
-      {/* Navigation */}
       <SpaceNav />
-      
-      {/* Deep Space Mission Sectors */}
       <SpaceHero />
       <SpaceAbout />
       <SpaceSingularity />
@@ -30,8 +21,6 @@ export default function Home() {
       <SpaceSkills />
       <SpaceCerts />
       <SpaceContact />
-      
-      {/* Footer */}
       <SpaceFooter />
     </main>
   );

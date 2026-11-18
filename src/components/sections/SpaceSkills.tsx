@@ -1,10 +1,58 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Cpu, Sparkles, Orbit, Terminal, Shield, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
+import {
+  Code2,
+  FileCode,
+  Braces,
+  Database,
+  Layers,
+  Search,
+  Cpu,
+  Network,
+  Terminal,
+  Activity,
+  Server,
+  Radio,
+  Gauge,
+  Globe,
+  Box,
+  Workflow,
+  HardDrive,
+  Zap,
+  Container,
+  GitBranch,
+  CheckSquare,
+  type LucideIcon,
+} from 'lucide-react';
 import { SKILLS, SKILL_CATEGORIES } from '@/data';
-import SpotlightTiltCard from '@/components/ui/SpotlightTiltCard';
+
+const ICON_MAP: Record<string, LucideIcon> = {
+  code: Code2,
+  'file-code': FileCode,
+  braces: Braces,
+  database: Database,
+  layers: Layers,
+  search: Search,
+  cpu: Cpu,
+  network: Network,
+  terminal: Terminal,
+  activity: Activity,
+  server: Server,
+  radio: Radio,
+  gauge: Gauge,
+  globe: Globe,
+  box: Box,
+  workflow: Workflow,
+  'hard-drive': HardDrive,
+  zap: Zap,
+  container: Container,
+  'git-branch': GitBranch,
+  'check-square': CheckSquare,
+};
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function SpaceSkills() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -15,114 +63,97 @@ export default function SpaceSkills() {
       : SKILLS.filter((s) => s.category === activeCategory);
 
   return (
-    <section id="skills" className="relative min-h-screen py-24 sm:py-32 overflow-hidden bg-void">
-      {/* Background Star Ambience */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] rounded-full bg-stellar-cyan/5 blur-[180px]" />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full cosmic-pill mb-4 text-xs font-mono text-stellar-cyan">
-            <Cpu className="w-3.5 h-3.5 text-stellar-cyan" />
-            <span>SECTOR_04 // TECHNICAL ARSENAL</span>
+    <section id="skills" className="py-20 sm:py-24 bg-canvas border-t border-hairline">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.38, ease: EASE }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
+        >
+          <div className="max-w-xl">
+            <p className="font-mono text-xs text-muted tracking-[0.01em] mb-3">
+              Skills
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-medium tracking-[-0.02em] leading-[1.15] text-primary">
+              Core stack and infrastructure
+            </h2>
           </div>
 
-          <h2 className="font-cinematic text-3xl sm:text-5xl font-extrabold tracking-tight text-starlight leading-tight">
-            CONSTELLATION OF <br />
-            <span className="shimmer-text">CAPABILITIES</span>
-          </h2>
+          {/* Filter tabs */}
+          <div
+            role="tablist"
+            aria-label="Filter skills by category"
+            className="flex flex-wrap gap-1.5"
+          >
+            {SKILL_CATEGORIES.map((cat) => {
+              const active = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`h-8 px-3 rounded-lg text-xs font-medium transition-[background-color,color,border-color] duration-150 ease-unslop border ${
+                    active
+                      ? 'bg-raised text-primary border-hairline-strong'
+                      : 'bg-transparent text-secondary border-transparent hover:text-primary hover:bg-surface'
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+        </motion.div>
 
-          <p className="font-mono text-xs sm:text-sm text-stardust mt-4 tracking-wide max-w-xl mx-auto">
-            Tools, architectures, and protocols engineered to deploy intelligent systems into production.
-          </p>
-        </div>
+        {/* Skills grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredSkills.map((skill) => {
+            const IconComponent = ICON_MAP[skill.icon] || Code2;
+            const isPrimaryStrength = skill.level >= 90;
 
-        {/* Category Pill Filters */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-14">
-          {SKILL_CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`relative px-4 sm:px-5 py-2 rounded-full text-xs font-mono tracking-wider uppercase transition-all ${
-                activeCategory === cat
-                  ? 'text-stellar-cyan font-bold'
-                  : 'text-stardust hover:text-starlight'
-              }`}
-            >
-              {activeCategory === cat && (
-                <motion.span
-                  layoutId="skills-star-pill"
-                  className="absolute inset-0 rounded-full bg-stellar-cyan/15 border border-stellar-cyan/40 shadow-stellar-sm"
-                  transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-                />
-              )}
-              <span className="relative z-10">{cat}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Skills Star Grid with 3D Spotlight Tilt */}
-        <motion.div
-          layout
-          className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-        >
-          <AnimatePresence>
-            {filteredSkills.map((skill, i) => (
-              <SpotlightTiltCard
+            return (
+              <div
                 key={skill.name}
-                tiltIntensity={6}
-                spotlightColor="rgba(0, 212, 255, 0.14)"
-                showCrosshairs={false}
-                className="cosmic-hud p-4 sm:p-5 rounded-2xl flex flex-col justify-between group relative overflow-hidden border border-white/10"
+                className="p-4 rounded-xl bg-surface border border-hairline flex flex-col gap-3"
               >
-                {/* Orbital Progress Background Glow */}
-                <div
-                  className="absolute top-0 right-0 w-24 h-24 rounded-bl-full opacity-10 group-hover:opacity-25 transition-opacity pointer-events-none"
-                  style={{ background: skill.color || '#00d4ff' }}
-                />
-
-                <div className="flex items-center justify-between mb-3 relative z-10">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl group-hover:scale-110 transition-transform">
-                      {skill.icon}
-                    </span>
-                    <div>
-                      <h4 className="font-display font-bold text-sm text-starlight group-hover:text-stellar-cyan transition-colors">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-8 h-8 rounded-lg bg-raised border border-hairline flex items-center justify-center text-muted shrink-0">
+                      <IconComponent className="w-4 h-4" strokeWidth={1.5} />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-medium text-primary truncate">
                         {skill.name}
-                      </h4>
-                      <span className="text-[10px] font-mono text-stardust uppercase">
+                      </h3>
+                      <span className="text-xs text-muted">
                         {skill.category}
                       </span>
                     </div>
                   </div>
 
-                  <span className="text-xs font-mono font-bold text-stellar-cyan">
+                  <span className="font-mono text-xs tabular-nums text-secondary shrink-0">
                     {skill.level}%
                   </span>
                 </div>
 
-                {/* Star Track Progress Line */}
-                <div className="relative h-1.5 w-full bg-white/5 rounded-full overflow-hidden mt-2">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, ease: 'easeOut' }}
-                    className="h-full rounded-full"
-                    style={{
-                      background: `linear-gradient(90deg, #00d4ff, ${skill.color || '#38bdf8'})`,
-                      boxShadow: `0 0 10px ${skill.color || '#00d4ff'}80`,
-                    }}
+                {/* Quiet neutral bar, subtle accent only on 90%+ core tools */}
+                <div className="h-1 w-full bg-raised rounded-sm overflow-hidden">
+                  <div
+                    className={`h-full rounded-sm ${
+                      isPrimaryStrength ? 'bg-accent/80' : 'bg-secondary/50'
+                    }`}
+                    style={{ width: `${skill.level}%` }}
                   />
                 </div>
-              </SpotlightTiltCard>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
