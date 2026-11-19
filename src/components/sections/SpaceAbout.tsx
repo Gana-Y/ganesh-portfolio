@@ -91,17 +91,63 @@ export default function SpaceAbout() {
           </div>
 
           <div className="lg:col-span-8 flex flex-col justify-between gap-8">
-            <div className="space-y-4 text-[15px] leading-[1.7] text-secondary">
-              <p className="text-primary">
-                I am Ganesh Yandigeri, a Python and AI systems engineer working at the intersection of low-latency backend architecture and retrieval-augmented language models.
-              </p>
+            <div className="space-y-5 text-[15px] leading-[1.75] text-secondary">
+              {/* Scroll-triggered highlighter sweep on identity sentence */}
+              <motion.p
+                initial={{ opacity: 0.9 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.4 }}
+                className="text-primary text-[15.5px]"
+              >
+                <motion.span
+                  initial={{ backgroundSize: '0% 100%' }}
+                  whileInView={{ backgroundSize: '100% 100%' }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                  className="rounded px-1.5 py-0.5 text-sky-100 font-medium border-b-2 border-sky-400/90 shadow-[0_0_15px_rgba(56,189,248,0.25)] bg-gradient-to-r from-sky-500/20 via-blue-500/25 to-sky-400/20 bg-no-repeat [background-position:0_100%] [box-decoration-break:clone] [-webkit-box-decoration-break:clone] inline leading-[1.85]"
+                >
+                  I am Ganesh Yandigeri, a Python and AI systems engineer working at the intersection of low-latency backend architecture and retrieval-augmented language models.
+                </motion.span>
+              </motion.p>
 
               <p>
                 Production AI systems depend as much on storage, scheduling, and isolation as on the model itself. My work focuses on deterministic execution engines and fast retrieval pipelines that hold up under strict memory, latency, and security bounds.
               </p>
 
+              {/* Scroll-triggered highlights on flagship projects */}
               <p>
-                Recent builds include <span className="text-primary font-medium">Florix AI</span> (ChromaDB HNSW retrieval with Google Gemini across 15+ PostgreSQL tables), <span className="text-primary font-medium">OrderCore</span> (a heap-indexed limit order book sustaining 136,000 orders/sec at 4.3 µs median latency), and <span className="text-primary font-medium">Vesper</span> (a Docker and Linux cgroup sandbox arbitrating untrusted C++17, Python, and Java code).
+                Recent builds include{' '}
+                <motion.span
+                  initial={{ backgroundSize: '0% 100%', color: 'inherit' }}
+                  whileInView={{ backgroundSize: '100% 100%', color: '#7dd3fc' }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: 0.5, ease: EASE }}
+                  className="font-semibold px-1.5 py-0.5 rounded bg-gradient-to-r from-sky-500/25 to-blue-500/25 border-b-2 border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)] bg-no-repeat [background-position:0_100%] inline-block transition-colors"
+                >
+                  Florix AI
+                </motion.span>{' '}
+                (ChromaDB HNSW retrieval with Google Gemini across 15+ PostgreSQL tables),{' '}
+                <motion.span
+                  initial={{ backgroundSize: '0% 100%', color: 'inherit' }}
+                  whileInView={{ backgroundSize: '100% 100%', color: '#7dd3fc' }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: 0.65, ease: EASE }}
+                  className="font-semibold px-1.5 py-0.5 rounded bg-gradient-to-r from-sky-500/25 to-blue-500/25 border-b-2 border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)] bg-no-repeat [background-position:0_100%] inline-block transition-colors"
+                >
+                  OrderCore
+                </motion.span>{' '}
+                (a heap-indexed limit order book sustaining 136,000 orders/sec at 4.3 µs median latency), and{' '}
+                <motion.span
+                  initial={{ backgroundSize: '0% 100%', color: 'inherit' }}
+                  whileInView={{ backgroundSize: '100% 100%', color: '#7dd3fc' }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: 0.8, ease: EASE }}
+                  className="font-semibold px-1.5 py-0.5 rounded bg-gradient-to-r from-sky-500/25 to-blue-500/25 border-b-2 border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)] bg-no-repeat [background-position:0_100%] inline-block transition-colors"
+                >
+                  Vesper
+                </motion.span>{' '}
+                (a Docker and Linux cgroup sandbox arbitrating untrusted C++17, Python, and Java code).
               </p>
             </div>
 
