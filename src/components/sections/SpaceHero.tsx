@@ -45,7 +45,7 @@ export default function SpaceHero() {
                 playsInline
                 className="w-full h-full object-cover"
               >
-                <source src="/videos/eye-hero.mp4" type="video/mp4" />
+                <source src="/videos/eye-hero.mp4?v=2" type="video/mp4" />
               </video>
 
               {/* Soft edge blend into page background */}
