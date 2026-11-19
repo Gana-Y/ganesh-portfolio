@@ -49,11 +49,11 @@ export default function SpaceNav() {
       }`}
     >
       <div className="max-w-6xl mx-auto h-full px-6 flex items-center justify-between gap-6">
-        {/* Wordmark */}
+        {/* Wordmark in custom signature script with shining blue glow */}
         <a
           href="#"
           onClick={scrollToTop}
-          className="text-base font-medium tracking-[-0.01em] text-primary hover:text-accent transition-colors duration-150 ease-unslop shrink-0"
+          className="font-script text-2xl sm:text-3xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-300 to-cyan-300 drop-shadow-[0_0_12px_rgba(56,189,248,0.7)] hover:drop-shadow-[0_0_22px_rgba(56,189,248,1)] hover:scale-105 transition-all duration-200 shrink-0 select-none py-1"
         >
           Ganesh Yandigeri
         </a>
@@ -67,10 +67,10 @@ export default function SpaceNav() {
                 key={link.href}
                 type="button"
                 onClick={() => handleNavClick(link.href)}
-                className={`h-8 px-3 rounded-lg text-sm font-normal transition-[background-color,color] duration-150 ease-unslop ${
+                className={`h-8 px-3 rounded-lg text-sm transition-all duration-150 ease-unslop ${
                   isActive
-                    ? 'bg-raised text-primary font-medium'
-                    : 'text-secondary hover:text-primary hover:bg-surface'
+                    ? 'bg-sky-500/15 text-sky-300 border border-sky-500/30 shadow-[0_0_15px_rgba(56,189,248,0.2)] font-medium'
+                    : 'text-secondary hover:text-sky-300 hover:bg-sky-500/10 hover:shadow-[0_0_12px_rgba(56,189,248,0.15)]'
                 }`}
               >
                 {link.label}
@@ -84,7 +84,7 @@ export default function SpaceNav() {
           <a
             href="/resume.pdf"
             download="Ganesh_Yandigeri_Resume.pdf"
-            className="hidden sm:inline-block text-sm text-secondary hover:text-primary transition-colors duration-150 ease-unslop"
+            className="hidden sm:inline-block text-sm text-secondary hover:text-sky-300 hover:drop-shadow-[0_0_8px_rgba(56,189,248,0.5)] transition-all duration-150 ease-unslop"
           >
             Resume
           </a>
@@ -92,7 +92,7 @@ export default function SpaceNav() {
           <button
             type="button"
             onClick={() => handleNavClick('#contact')}
-            className="h-9 px-4 rounded-lg bg-primary text-canvas text-sm font-medium hover:bg-primary/90 active:scale-[0.98] transition-[background-color,transform] duration-150 ease-unslop"
+            className="h-9 px-4 rounded-lg bg-gradient-to-r from-sky-500 to-blue-600 text-white text-sm font-medium border border-sky-400/40 shadow-[0_0_15px_rgba(56,189,248,0.35)] hover:from-sky-400 hover:to-blue-500 hover:shadow-[0_0_25px_rgba(56,189,248,0.6)] active:scale-[0.98] transition-all duration-150 ease-unslop"
           >
             Get in touch
           </button>
@@ -100,7 +100,7 @@ export default function SpaceNav() {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden h-9 w-9 rounded-lg flex items-center justify-center text-secondary hover:text-primary hover:bg-surface transition-colors duration-150 ease-unslop"
+            className="md:hidden h-9 w-9 rounded-lg flex items-center justify-center text-secondary hover:text-sky-300 hover:bg-sky-500/10 transition-colors duration-150 ease-unslop"
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
           >
@@ -121,8 +121,8 @@ export default function SpaceNav() {
                 onClick={() => handleNavClick(link.href)}
                 className={`h-10 px-3 rounded-lg text-left text-sm transition-colors duration-150 ease-unslop ${
                   isActive
-                    ? 'bg-raised text-primary font-medium'
-                    : 'text-secondary hover:text-primary'
+                    ? 'bg-sky-500/15 text-sky-300 font-medium border border-sky-500/30'
+                    : 'text-secondary hover:text-sky-300 hover:bg-sky-500/10'
                 }`}
               >
                 {link.label}
@@ -132,7 +132,7 @@ export default function SpaceNav() {
           <a
             href="/resume.pdf"
             download="Ganesh_Yandigeri_Resume.pdf"
-            className="h-10 px-3 mt-2 rounded-lg border border-hairline flex items-center justify-center text-sm text-primary hover:bg-raised transition-colors duration-150 ease-unslop"
+            className="h-10 px-3 mt-2 rounded-lg border border-hairline flex items-center justify-center text-sm text-primary hover:text-sky-300 hover:border-sky-500/40 hover:bg-sky-500/10 transition-colors duration-150 ease-unslop"
           >
             Download resume (PDF)
           </a>

@@ -62,15 +62,24 @@ export default function SpaceContact() {
   const onSubmit = async (data: FormData) => {
     setSending(true);
     try {
-      const mailtoUrl = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
+      const mailtoUrl = `mailto:${encodeURIComponent(PERSONAL_INFO.email)}?subject=${encodeURIComponent(
         data.subject
-      )}&body=${encodeURIComponent(`From: ${data.name} (${data.email})\n\n${data.message}`)}`;
+      )}&body=${encodeURIComponent(
+        `Hi Ganesh,\n\n${data.message}\n\nFrom: ${data.name} (${data.email})`
+      )}`;
 
-      window.open(mailtoUrl, '_blank');
-      toast.success('Message draft opened in your email client');
+      const link = document.createElement('a');
+      link.href = mailtoUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      toast.success('Email draft opened in your default email client.');
       reset();
     } catch {
-      toast.error('Could not open email client');
+      toast.error('Could not open email client. Please email directly.');
     } finally {
       setSending(false);
     }
@@ -79,66 +88,63 @@ export default function SpaceContact() {
   return (
     <section id="contact" className="py-20 sm:py-24 bg-canvas border-t border-hairline">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.38, ease: EASE }}
-          className="max-w-2xl mb-12"
-        >
-          <p className="font-mono text-xs text-muted tracking-[0.01em] mb-3">
-            Contact
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-medium tracking-[-0.02em] leading-[1.15] text-primary">
-            Get in touch
-          </h2>
-          <p className="text-sm text-secondary mt-3">
-            Open to full-time backend and AI systems roles, low-latency engineering work, and technical collaborations.
-          </p>
-        </motion.div>
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          {/* Left: Contact info */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.38, ease: EASE }}
+            className="lg:col-span-5"
+          >
+            <p className="font-mono text-xs text-sky-400 tracking-[0.02em] mb-3 drop-shadow-[0_0_8px_rgba(56,189,248,0.3)]">
+              Contact
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-medium tracking-[-0.02em] leading-[1.15] text-primary">
+              Let&apos;s build together
+            </h2>
+            <p className="text-sm text-secondary mt-4 leading-relaxed max-w-md">
+              Available for full-time engineering roles, high-throughput systems design, and production RAG pipeline architecture.
+            </p>
 
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left: Direct channels */}
-          <div className="lg:col-span-5 space-y-3">
-            {CHANNELS.map((ch) => {
-              const content = (
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-surface border border-hairline hover:border-hairline-strong transition-colors duration-150 ease-unslop">
-                  <div className="w-9 h-9 rounded-lg bg-raised border border-hairline flex items-center justify-center text-muted shrink-0">
-                    <ch.icon className="w-4 h-4" strokeWidth={1.5} />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-xs text-muted">{ch.label}</div>
-                    <div className="text-sm font-mono text-primary truncate mt-0.5">
-                      {ch.value}
+            <div className="space-y-3 mt-8">
+              {CHANNELS.map((item) => {
+                const Content = (
+                  <div className="p-4 rounded-xl bg-surface border border-hairline hover:border-sky-500/50 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] hover:bg-surface/90 transition-all duration-150 flex items-center gap-3.5 group">
+                    <div className="w-9 h-9 rounded-lg bg-raised border border-hairline group-hover:border-sky-500/50 group-hover:text-sky-400 flex items-center justify-center text-muted shrink-0 transition-colors">
+                      <item.icon className="w-4 h-4" strokeWidth={1.5} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-xs text-muted">{item.label}</div>
+                      <div className="text-sm font-medium text-primary group-hover:text-sky-300 truncate transition-colors">
+                        {item.value}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
+                );
 
-              if (!ch.href) {
-                return <div key={ch.label}>{content}</div>;
-              }
+                return item.href ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="block"
+                  >
+                    {Content}
+                  </a>
+                ) : (
+                  <div key={item.label}>{Content}</div>
+                );
+              })}
+            </div>
+          </motion.div>
 
-              return (
-                <a
-                  key={ch.label}
-                  href={ch.href}
-                  target={ch.href.startsWith('http') ? '_blank' : undefined}
-                  rel={ch.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="block"
-                >
-                  {content}
-                </a>
-              );
-            })}
-          </div>
-
-          {/* Right: Contact form */}
+          {/* Right: Functional contact form */}
           <div className="lg:col-span-7">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="p-6 sm:p-8 rounded-2xl bg-surface border border-hairline space-y-5"
+              className="p-6 sm:p-8 rounded-2xl bg-surface border border-hairline hover:border-sky-500/30 transition-colors space-y-5"
             >
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -152,7 +158,7 @@ export default function SpaceContact() {
                     id="contact-name"
                     {...register('name')}
                     placeholder="Your name"
-                    className="w-full h-10 px-3 rounded-lg bg-deep border border-hairline text-sm text-primary placeholder:text-muted focus:border-accent focus:outline-none transition-colors duration-150"
+                    className="w-full h-10 px-3 rounded-lg bg-deep border border-hairline text-sm text-primary placeholder:text-muted focus:border-sky-400 focus:ring-1 focus:ring-sky-400 focus:shadow-[0_0_15px_rgba(56,189,248,0.25)] focus:outline-none transition-all duration-150"
                   />
                   {errors.name && (
                     <p className="text-danger text-xs mt-1.5">{errors.name.message}</p>
@@ -171,7 +177,7 @@ export default function SpaceContact() {
                     {...register('email')}
                     type="email"
                     placeholder="you@company.com"
-                    className="w-full h-10 px-3 rounded-lg bg-deep border border-hairline text-sm text-primary placeholder:text-muted focus:border-accent focus:outline-none transition-colors duration-150"
+                    className="w-full h-10 px-3 rounded-lg bg-deep border border-hairline text-sm text-primary placeholder:text-muted focus:border-sky-400 focus:ring-1 focus:ring-sky-400 focus:shadow-[0_0_15px_rgba(56,189,248,0.25)] focus:outline-none transition-all duration-150"
                   />
                   {errors.email && (
                     <p className="text-danger text-xs mt-1.5">{errors.email.message}</p>
@@ -190,7 +196,7 @@ export default function SpaceContact() {
                   id="contact-subject"
                   {...register('subject')}
                   placeholder="Role inquiry, collaboration, or project question"
-                  className="w-full h-10 px-3 rounded-lg bg-deep border border-hairline text-sm text-primary placeholder:text-muted focus:border-accent focus:outline-none transition-colors duration-150"
+                  className="w-full h-10 px-3 rounded-lg bg-deep border border-hairline text-sm text-primary placeholder:text-muted focus:border-sky-400 focus:ring-1 focus:ring-sky-400 focus:shadow-[0_0_15px_rgba(56,189,248,0.25)] focus:outline-none transition-all duration-150"
                 />
                 {errors.subject && (
                   <p className="text-danger text-xs mt-1.5">{errors.subject.message}</p>
@@ -209,7 +215,7 @@ export default function SpaceContact() {
                   {...register('message')}
                   rows={4}
                   placeholder="Write your message"
-                  className="w-full p-3 rounded-lg bg-deep border border-hairline text-sm text-primary placeholder:text-muted focus:border-accent focus:outline-none transition-colors duration-150 resize-none"
+                  className="w-full p-3 rounded-lg bg-deep border border-hairline text-sm text-primary placeholder:text-muted focus:border-sky-400 focus:ring-1 focus:ring-sky-400 focus:shadow-[0_0_15px_rgba(56,189,248,0.25)] focus:outline-none transition-all duration-150 resize-none"
                 />
                 {errors.message && (
                   <p className="text-danger text-xs mt-1.5">{errors.message.message}</p>
@@ -219,7 +225,7 @@ export default function SpaceContact() {
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full h-11 rounded-lg bg-primary text-canvas text-sm font-medium inline-flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-[0.98] transition-[background-color,transform] duration-150 ease-unslop disabled:opacity-50"
+                className="w-full h-11 rounded-lg bg-gradient-to-r from-sky-500 to-blue-600 text-white text-sm font-medium inline-flex items-center justify-center gap-2 border border-sky-400/40 shadow-[0_0_20px_rgba(56,189,248,0.4)] hover:from-sky-400 hover:to-blue-500 hover:shadow-[0_0_30px_rgba(56,189,248,0.65)] active:scale-[0.98] transition-all duration-150 ease-unslop disabled:opacity-50"
               >
                 <Send className="w-4 h-4" strokeWidth={1.5} />
                 <span>{sending ? 'Opening email client' : 'Send message'}</span>

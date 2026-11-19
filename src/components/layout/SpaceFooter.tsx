@@ -26,7 +26,7 @@ export default function SpaceFooter() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-hairline">
           <div>
-            <div className="text-base font-medium text-primary">
+            <div className="font-script text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-300 to-cyan-300 drop-shadow-[0_0_10px_rgba(56,189,248,0.6)]">
               Ganesh Yandigeri
             </div>
             <div className="text-xs font-mono text-muted mt-1">
@@ -42,7 +42,7 @@ export default function SpaceFooter() {
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 aria-label={link.label}
-                className="w-9 h-9 rounded-lg border border-hairline bg-surface flex items-center justify-center text-muted hover:text-primary hover:border-hairline-strong transition-colors duration-150 ease-unslop"
+                className="w-9 h-9 rounded-lg border border-hairline bg-surface flex items-center justify-center text-muted hover:text-sky-400 hover:border-sky-500/50 hover:shadow-[0_0_14px_rgba(56,189,248,0.3)] hover:bg-sky-500/10 transition-all duration-150 ease-unslop"
               >
                 {iconMap[link.icon] || <Code2 className="w-4 h-4" strokeWidth={1.5} />}
               </a>
@@ -52,16 +52,16 @@ export default function SpaceFooter() {
           <button
             type="button"
             onClick={scrollToTop}
-            className="h-9 px-3 rounded-lg border border-hairline bg-surface inline-flex items-center gap-2 text-xs text-secondary hover:text-primary hover:border-hairline-strong transition-colors duration-150 ease-unslop"
+            className="h-9 px-3.5 rounded-lg border border-hairline bg-surface inline-flex items-center gap-2 text-xs text-secondary hover:text-sky-300 hover:border-sky-500/50 hover:shadow-[0_0_14px_rgba(56,189,248,0.3)] hover:bg-sky-500/10 transition-all duration-150 ease-unslop"
           >
             <span>Back to top</span>
-            <ArrowUp className="w-4 h-4 text-muted" strokeWidth={1.5} />
+            <ArrowUp className="w-4 h-4 text-muted group-hover:text-sky-400" strokeWidth={1.5} />
           </button>
         </div>
 
         <div className="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-muted">
           <span>© {new Date().getFullYear()} Ganesh Yandigeri</span>
-          <span className="font-mono">Next.js · TypeScript · Tailwind CSS</span>
+          <span className="font-mono text-sky-400/80">Next.js · TypeScript · Tailwind CSS</span>
         </div>
       </div>
     </footer>

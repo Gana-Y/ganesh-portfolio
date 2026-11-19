@@ -19,37 +19,37 @@ export const SOCIAL_LINKS: SocialLink[] = [
 
 export const SKILLS: Skill[] = [
   // Languages
-  { name: 'Python', category: 'Languages', level: 95, icon: 'code', color: '#2dd4bf' },
-  { name: 'JavaScript', category: 'Languages', level: 85, icon: 'file-code', color: '#2dd4bf' },
-  { name: 'TypeScript', category: 'Languages', level: 82, icon: 'braces', color: '#2dd4bf' },
-  { name: 'SQL', category: 'Languages', level: 84, icon: 'database', color: '#2dd4bf' },
+  { name: 'Python', category: 'Languages', level: 95, icon: 'code', color: '#38bdf8' },
+  { name: 'JavaScript', category: 'Languages', level: 85, icon: 'file-code', color: '#38bdf8' },
+  { name: 'TypeScript', category: 'Languages', level: 82, icon: 'braces', color: '#38bdf8' },
+  { name: 'SQL', category: 'Languages', level: 84, icon: 'database', color: '#38bdf8' },
 
   // AI / ML
-  { name: 'RAG Pipelines', category: 'AI/ML', level: 92, icon: 'layers', color: '#2dd4bf' },
-  { name: 'ChromaDB', category: 'AI/ML', level: 90, icon: 'search', color: '#2dd4bf' },
-  { name: 'Google Gemini API', category: 'AI/ML', level: 92, icon: 'cpu', color: '#2dd4bf' },
-  { name: 'Semantic Embeddings', category: 'AI/ML', level: 88, icon: 'network', color: '#2dd4bf' },
-  { name: 'Prompt Engineering', category: 'AI/ML', level: 90, icon: 'terminal', color: '#2dd4bf' },
-  { name: 'PyTorch', category: 'AI/ML', level: 80, icon: 'activity', color: '#2dd4bf' },
+  { name: 'RAG Pipelines', category: 'AI/ML', level: 92, icon: 'layers', color: '#38bdf8' },
+  { name: 'ChromaDB', category: 'AI/ML', level: 90, icon: 'search', color: '#38bdf8' },
+  { name: 'Google Gemini API', category: 'AI/ML', level: 92, icon: 'cpu', color: '#38bdf8' },
+  { name: 'Semantic Embeddings', category: 'AI/ML', level: 88, icon: 'network', color: '#38bdf8' },
+  { name: 'Prompt Engineering', category: 'AI/ML', level: 90, icon: 'terminal', color: '#38bdf8' },
+  { name: 'PyTorch', category: 'AI/ML', level: 80, icon: 'activity', color: '#38bdf8' },
 
   // Backend & Systems
-  { name: 'FastAPI', category: 'Backend', level: 92, icon: 'server', color: '#2dd4bf' },
-  { name: 'AsyncIO & WebSockets', category: 'Backend', level: 88, icon: 'radio', color: '#2dd4bf' },
-  { name: 'Low-Latency Design', category: 'Backend', level: 85, icon: 'gauge', color: '#2dd4bf' },
-  { name: 'REST APIs & Microservices', category: 'Backend', level: 90, icon: 'globe', color: '#2dd4bf' },
-  { name: 'Flask', category: 'Backend', level: 80, icon: 'box', color: '#2dd4bf' },
-  { name: 'Node.js', category: 'Backend', level: 75, icon: 'workflow', color: '#2dd4bf' },
+  { name: 'FastAPI', category: 'Backend', level: 92, icon: 'server', color: '#38bdf8' },
+  { name: 'AsyncIO & WebSockets', category: 'Backend', level: 88, icon: 'radio', color: '#38bdf8' },
+  { name: 'Low-Latency Design', category: 'Backend', level: 85, icon: 'gauge', color: '#38bdf8' },
+  { name: 'REST APIs & Microservices', category: 'Backend', level: 90, icon: 'globe', color: '#38bdf8' },
+  { name: 'Flask', category: 'Backend', level: 80, icon: 'box', color: '#38bdf8' },
+  { name: 'Node.js', category: 'Backend', level: 75, icon: 'workflow', color: '#38bdf8' },
 
   // Databases
-  { name: 'PostgreSQL', category: 'Databases', level: 84, icon: 'database', color: '#2dd4bf' },
-  { name: 'MongoDB', category: 'Databases', level: 80, icon: 'hard-drive', color: '#2dd4bf' },
-  { name: 'Redis', category: 'Databases', level: 82, icon: 'zap', color: '#2dd4bf' },
+  { name: 'PostgreSQL', category: 'Databases', level: 84, icon: 'database', color: '#38bdf8' },
+  { name: 'MongoDB', category: 'Databases', level: 80, icon: 'hard-drive', color: '#38bdf8' },
+  { name: 'Redis', category: 'Databases', level: 82, icon: 'zap', color: '#38bdf8' },
 
   // Tools & Infra
-  { name: 'Docker', category: 'Tools', level: 82, icon: 'container', color: '#2dd4bf' },
-  { name: 'Git', category: 'Tools', level: 90, icon: 'git-branch', color: '#2dd4bf' },
-  { name: 'Linux', category: 'Tools', level: 85, icon: 'terminal', color: '#2dd4bf' },
-  { name: 'Pytest & CI/CD', category: 'Tools', level: 85, icon: 'check-square', color: '#2dd4bf' },
+  { name: 'Docker', category: 'Tools', level: 82, icon: 'container', color: '#38bdf8' },
+  { name: 'Git', category: 'Tools', level: 90, icon: 'git-branch', color: '#38bdf8' },
+  { name: 'Linux', category: 'Tools', level: 85, icon: 'terminal', color: '#38bdf8' },
+  { name: 'Pytest & CI/CD', category: 'Tools', level: 85, icon: 'check-square', color: '#38bdf8' },
 ];
 
 export const SKILL_CATEGORIES = ['All', 'Languages', 'AI/ML', 'Backend', 'Databases', 'Tools'];

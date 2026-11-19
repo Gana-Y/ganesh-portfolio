@@ -48,7 +48,7 @@ export default function SpaceAbout() {
           transition={{ duration: 0.38, ease: EASE }}
           className="max-w-2xl mb-12"
         >
-          <p className="font-mono text-xs text-muted tracking-[0.01em] mb-3">
+          <p className="font-mono text-xs text-sky-400 tracking-[0.02em] mb-3 drop-shadow-[0_0_8px_rgba(56,189,248,0.3)]">
             About
           </p>
           <h2 className="text-3xl sm:text-4xl font-medium tracking-[-0.02em] leading-[1.15] text-primary">
@@ -59,7 +59,7 @@ export default function SpaceAbout() {
         {/* Portrait and bio */}
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-16">
           <div className="lg:col-span-4">
-            <div className="rounded-2xl overflow-hidden border border-hairline bg-surface">
+            <div className="rounded-2xl overflow-hidden border border-hairline bg-surface hover:border-sky-500/50 hover:shadow-[0_0_30px_rgba(56,189,248,0.22)] transition-all duration-300">
               <div className="relative w-full aspect-[4/5] bg-deep">
                 <img
                   src="/images/portrait.png"
@@ -83,7 +83,7 @@ export default function SpaceAbout() {
                   </div>
                 </div>
                 <div className="text-right font-mono tabular-nums">
-                  <div className="text-xs font-medium text-primary">MCA 9.35</div>
+                  <div className="text-xs font-medium text-sky-400">MCA 9.35</div>
                   <div className="text-xs text-muted mt-0.5">0 backlogs</div>
                 </div>
               </div>
@@ -110,12 +110,12 @@ export default function SpaceAbout() {
               {STATS.map((item) => (
                 <div
                   key={item.label}
-                  className="p-4 rounded-xl bg-surface border border-hairline"
+                  className="p-4 rounded-xl bg-surface border border-hairline hover:border-sky-500/50 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] transition-all duration-150 group"
                 >
-                  <div className="font-mono text-2xl font-medium tabular-nums text-primary leading-none">
+                  <div className="font-mono text-2xl font-medium tabular-nums text-sky-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.35)] leading-none group-hover:text-sky-300 group-hover:drop-shadow-[0_0_16px_rgba(56,189,248,0.6)] transition-all">
                     {item.val}
                   </div>
-                  <div className="text-xs text-muted mt-2">{item.label}</div>
+                  <div className="text-xs text-muted mt-2 group-hover:text-secondary transition-colors">{item.label}</div>
                 </div>
               ))}
             </div>
@@ -127,12 +127,12 @@ export default function SpaceAbout() {
           {FOCUS_AREAS.map((item) => (
             <div
               key={item.title}
-              className="p-5 rounded-xl bg-surface border border-hairline flex flex-col gap-3"
+              className="p-5 rounded-xl bg-surface border border-hairline hover:border-sky-500/40 hover:shadow-[0_0_22px_rgba(56,189,248,0.18)] transition-all duration-150 flex flex-col gap-3 group"
             >
-              <div className="w-8 h-8 rounded-lg bg-raised border border-hairline flex items-center justify-center text-muted">
+              <div className="w-8 h-8 rounded-lg bg-raised border border-hairline flex items-center justify-center text-muted group-hover:border-sky-500/50 group-hover:text-sky-400 transition-colors">
                 <item.icon className="w-4 h-4" strokeWidth={1.5} />
               </div>
-              <h3 className="text-[15px] font-medium text-primary">
+              <h3 className="text-[15px] font-medium text-primary group-hover:text-sky-300 transition-colors">
                 {item.title}
               </h3>
               <p className="text-sm text-secondary leading-relaxed">

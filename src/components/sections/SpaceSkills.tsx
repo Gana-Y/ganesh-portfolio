@@ -74,7 +74,7 @@ export default function SpaceSkills() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
         >
           <div className="max-w-xl">
-            <p className="font-mono text-xs text-muted tracking-[0.01em] mb-3">
+            <p className="font-mono text-xs text-sky-400 tracking-[0.02em] mb-3 drop-shadow-[0_0_8px_rgba(56,189,248,0.3)]">
               Skills
             </p>
             <h2 className="text-3xl sm:text-4xl font-medium tracking-[-0.02em] leading-[1.15] text-primary">
@@ -97,10 +97,10 @@ export default function SpaceSkills() {
                   role="tab"
                   aria-selected={active}
                   onClick={() => setActiveCategory(cat)}
-                  className={`h-8 px-3 rounded-lg text-xs font-medium transition-[background-color,color,border-color] duration-150 ease-unslop border ${
+                  className={`h-8 px-3 rounded-lg text-xs font-medium transition-all duration-150 ease-unslop border ${
                     active
-                      ? 'bg-raised text-primary border-hairline-strong'
-                      : 'bg-transparent text-secondary border-transparent hover:text-primary hover:bg-surface'
+                      ? 'bg-sky-500/20 text-sky-300 border-sky-500/50 shadow-[0_0_15px_rgba(56,189,248,0.25)] font-medium'
+                      : 'bg-transparent text-secondary border-transparent hover:text-sky-300 hover:bg-sky-500/10 hover:border-sky-500/30'
                   }`}
                 >
                   {cat}
@@ -119,15 +119,15 @@ export default function SpaceSkills() {
             return (
               <div
                 key={skill.name}
-                className="p-4 rounded-xl bg-surface border border-hairline flex flex-col gap-3"
+                className="p-4 rounded-xl bg-surface border border-hairline hover:border-sky-500/50 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] transition-all duration-150 flex flex-col gap-3 group"
               >
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-8 h-8 rounded-lg bg-raised border border-hairline flex items-center justify-center text-muted shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-raised border border-hairline group-hover:border-sky-500/50 group-hover:text-sky-400 flex items-center justify-center text-muted shrink-0 transition-colors">
                       <IconComponent className="w-4 h-4" strokeWidth={1.5} />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-sm font-medium text-primary truncate">
+                      <h3 className="text-sm font-medium text-primary group-hover:text-sky-300 truncate transition-colors">
                         {skill.name}
                       </h3>
                       <span className="text-xs text-muted">
@@ -136,16 +136,18 @@ export default function SpaceSkills() {
                     </div>
                   </div>
 
-                  <span className="font-mono text-xs tabular-nums text-secondary shrink-0">
+                  <span className="font-mono text-xs tabular-nums text-sky-400 shrink-0">
                     {skill.level}%
                   </span>
                 </div>
 
-                {/* Quiet neutral bar, subtle accent only on 90%+ core tools */}
-                <div className="h-1 w-full bg-raised rounded-sm overflow-hidden">
+                {/* Blue glowing strength bar */}
+                <div className="h-1.5 w-full bg-raised rounded-sm overflow-hidden">
                   <div
                     className={`h-full rounded-sm ${
-                      isPrimaryStrength ? 'bg-accent/80' : 'bg-secondary/50'
+                      isPrimaryStrength
+                        ? 'bg-gradient-to-r from-sky-500 to-blue-500 shadow-[0_0_10px_rgba(56,189,248,0.6)]'
+                        : 'bg-sky-500/60'
                     }`}
                     style={{ width: `${skill.level}%` }}
                   />

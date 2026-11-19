@@ -57,7 +57,7 @@ export default function SpaceCerts() {
           transition={{ duration: 0.38, ease: EASE }}
           className="max-w-2xl mb-12"
         >
-          <p className="font-mono text-xs text-muted tracking-[0.01em] mb-3">
+          <p className="font-mono text-xs text-sky-400 tracking-[0.02em] mb-3 drop-shadow-[0_0_8px_rgba(56,189,248,0.3)]">
             Certifications
           </p>
           <h2 className="text-3xl sm:text-4xl font-medium tracking-[-0.02em] leading-[1.15] text-primary">
@@ -84,32 +84,32 @@ export default function SpaceCerts() {
                     setSelectedCert(cert);
                   }
                 }}
-                className="p-5 rounded-2xl bg-surface border border-hairline hover:border-hairline-strong transition-colors duration-150 ease-unslop flex flex-col justify-between cursor-pointer text-left"
+                className="p-5 rounded-2xl bg-surface border border-hairline hover:border-sky-500/50 hover:shadow-[0_0_25px_rgba(56,189,248,0.2)] transition-all duration-200 ease-unslop flex flex-col justify-between cursor-pointer text-left group"
               >
                 <div>
                   {/* Top row: icon and issue date */}
                   <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-lg bg-raised border border-hairline flex items-center justify-center text-muted">
+                    <div className="w-8 h-8 rounded-lg bg-raised border border-hairline group-hover:border-sky-500/50 group-hover:text-sky-400 flex items-center justify-center text-muted transition-colors">
                       <IconComponent className="w-4 h-4" strokeWidth={1.5} />
                     </div>
-                    <span className="font-mono text-xs text-muted tabular-nums">
+                    <span className="font-mono text-xs text-muted tabular-nums group-hover:text-sky-400/80 transition-colors">
                       {cert.date}
                     </span>
                   </div>
 
                   {/* Certificate preview thumbnail */}
                   {cert.previewUrl && (
-                    <div className="w-full aspect-[16/10] rounded-lg overflow-hidden mb-4 border border-hairline bg-deep">
+                    <div className="w-full aspect-[16/10] rounded-lg overflow-hidden mb-4 border border-hairline bg-deep group-hover:border-sky-500/30 transition-colors">
                       <img
                         src={cert.previewUrl}
                         alt={cert.title}
-                        className="w-full h-full object-cover object-top"
+                        className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
                       />
                     </div>
                   )}
 
                   {/* Title and issuer */}
-                  <h3 className="text-[15px] font-medium text-primary leading-snug line-clamp-2">
+                  <h3 className="text-[15px] font-medium text-primary leading-snug line-clamp-2 group-hover:text-sky-300 transition-colors">
                     {cert.title}
                   </h3>
                   <p className="text-xs text-muted mt-1.5">
@@ -125,7 +125,7 @@ export default function SpaceCerts() {
                       e.stopPropagation();
                       setSelectedCert(cert);
                     }}
-                    className="h-8 px-3 rounded-lg bg-raised border border-hairline text-xs font-medium text-primary hover:border-hairline-strong transition-colors duration-150 ease-unslop"
+                    className="h-8 px-3 rounded-lg bg-raised border border-hairline text-xs font-medium text-primary hover:border-sky-500/50 hover:text-sky-300 hover:shadow-[0_0_12px_rgba(56,189,248,0.25)] hover:bg-sky-500/10 transition-all duration-150 ease-unslop"
                   >
                     View certificate
                   </button>
@@ -136,7 +136,7 @@ export default function SpaceCerts() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="w-8 h-8 rounded-lg bg-raised border border-hairline flex items-center justify-center text-muted hover:text-primary hover:border-hairline-strong transition-colors duration-150 ease-unslop"
+                      className="w-8 h-8 rounded-lg bg-raised border border-hairline flex items-center justify-center text-muted hover:text-sky-300 hover:border-sky-500/50 hover:shadow-[0_0_12px_rgba(56,189,248,0.25)] hover:bg-sky-500/10 transition-all duration-150 ease-unslop"
                       title="Open PDF directly"
                       aria-label={`Open ${cert.title} PDF`}
                     >
@@ -173,7 +173,7 @@ export default function SpaceCerts() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.22, ease: EASE }}
-              className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-2xl bg-surface border border-hairline-strong p-6 sm:p-8 z-10 flex flex-col gap-5"
+              className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-2xl bg-surface border border-sky-500/30 shadow-[0_0_40px_rgba(56,189,248,0.25)] p-6 sm:p-8 z-10 flex flex-col gap-5"
             >
               {/* Header */}
               <div className="flex items-start justify-between gap-4 pb-4 border-b border-hairline">
@@ -185,7 +185,7 @@ export default function SpaceCerts() {
                     {selectedCert.credentialId && (
                       <>
                         <span>·</span>
-                        <span>ID {selectedCert.credentialId}</span>
+                        <span className="text-sky-400">ID {selectedCert.credentialId}</span>
                       </>
                     )}
                   </div>
@@ -200,7 +200,7 @@ export default function SpaceCerts() {
                 <button
                   type="button"
                   onClick={() => setSelectedCert(null)}
-                  className="w-9 h-9 rounded-lg bg-raised border border-hairline flex items-center justify-center text-secondary hover:text-primary hover:border-hairline-strong transition-colors duration-150 shrink-0"
+                  className="w-9 h-9 rounded-lg bg-raised border border-hairline flex items-center justify-center text-secondary hover:text-sky-300 hover:border-sky-500/50 hover:shadow-[0_0_12px_rgba(56,189,248,0.25)] transition-all duration-150 shrink-0"
                   aria-label="Close dialog"
                 >
                   <X className="w-4 h-4" strokeWidth={1.5} />
@@ -227,14 +227,14 @@ export default function SpaceCerts() {
               {/* Competencies */}
               {selectedCert.skills && selectedCert.skills.length > 0 && (
                 <div>
-                  <span className="font-mono text-xs text-muted block mb-2">
-                    Validated skills
+                  <span className="font-mono text-xs text-sky-400 block mb-2 tracking-wider">
+                    Validated competencies
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {selectedCert.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="px-2.5 py-1 rounded-md bg-raised border border-hairline text-xs text-secondary"
+                        className="px-2.5 py-1 rounded-md bg-sky-950/30 border border-sky-500/20 text-xs text-sky-300"
                       >
                         {skill}
                       </span>
@@ -251,7 +251,7 @@ export default function SpaceCerts() {
                       href={selectedCert.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="h-9 px-4 rounded-lg bg-primary text-canvas text-xs font-medium inline-flex items-center gap-1.5 hover:bg-primary/90 transition-colors duration-150"
+                      className="h-9 px-4 rounded-lg bg-gradient-to-r from-sky-500 to-blue-600 text-white text-xs font-medium inline-flex items-center gap-1.5 border border-sky-400/40 shadow-[0_0_15px_rgba(56,189,248,0.35)] hover:from-sky-400 hover:to-blue-500 hover:shadow-[0_0_25px_rgba(56,189,248,0.6)] transition-all duration-150"
                     >
                       <FileText className="w-3.5 h-3.5" strokeWidth={1.5} />
                       <span>Open full PDF</span>
@@ -260,7 +260,7 @@ export default function SpaceCerts() {
                     <a
                       href={selectedCert.pdfUrl}
                       download
-                      className="h-9 px-3.5 rounded-lg bg-raised border border-hairline text-xs font-medium text-primary inline-flex items-center gap-1.5 hover:border-hairline-strong transition-colors duration-150"
+                      className="h-9 px-3.5 rounded-lg bg-raised border border-hairline text-xs font-medium text-primary inline-flex items-center gap-1.5 hover:border-sky-500/50 hover:text-sky-300 hover:shadow-[0_0_12px_rgba(56,189,248,0.25)] hover:bg-sky-500/10 transition-all duration-150"
                     >
                       <Download className="w-3.5 h-3.5 text-muted" strokeWidth={1.5} />
                       <span>Download</span>
@@ -273,7 +273,7 @@ export default function SpaceCerts() {
                     href={selectedCert.credentialUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="h-9 px-3.5 rounded-lg bg-raised border border-hairline text-xs font-medium text-secondary hover:text-primary inline-flex items-center gap-1.5 hover:border-hairline-strong transition-colors duration-150"
+                    className="h-9 px-3.5 rounded-lg bg-raised border border-hairline text-xs font-medium text-secondary hover:text-sky-300 hover:border-sky-500/50 hover:shadow-[0_0_12px_rgba(56,189,248,0.25)] hover:bg-sky-500/10 inline-flex items-center gap-1.5 transition-all duration-150"
                   >
                     <ExternalLink className="w-3.5 h-3.5 text-muted" strokeWidth={1.5} />
                     <span>Verify online</span>

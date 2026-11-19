@@ -57,7 +57,7 @@ export default function SpaceSingularity() {
           transition={{ duration: 0.38, ease: EASE }}
           className="max-w-2xl mb-12"
         >
-          <p className="font-mono text-xs text-muted tracking-[0.01em] mb-3">
+          <p className="font-mono text-xs text-sky-400 tracking-[0.02em] mb-3 drop-shadow-[0_0_8px_rgba(56,189,248,0.3)]">
             Approach
           </p>
           <h2 className="text-3xl sm:text-4xl font-medium tracking-[-0.02em] leading-[1.15] text-primary">
@@ -68,7 +68,7 @@ export default function SpaceSingularity() {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left: Clean looping visual with minimal playback controls */}
           <div className="lg:col-span-6">
-            <div className="rounded-2xl overflow-hidden border border-hairline bg-surface">
+            <div className="rounded-2xl overflow-hidden border border-hairline bg-surface hover:border-sky-500/40 hover:shadow-[0_0_30px_rgba(56,189,248,0.2)] transition-all duration-300">
               <div className="relative w-full aspect-square bg-deep">
                 <video
                   ref={videoRef}
@@ -88,7 +88,7 @@ export default function SpaceSingularity() {
                   <button
                     type="button"
                     onClick={togglePlay}
-                    className="w-8 h-8 rounded-lg bg-raised border border-hairline text-secondary hover:text-primary hover:border-hairline-strong flex items-center justify-center transition-colors duration-150 ease-unslop"
+                    className="w-8 h-8 rounded-lg bg-raised border border-hairline text-secondary hover:text-sky-300 hover:border-sky-500/50 hover:shadow-[0_0_12px_rgba(56,189,248,0.25)] flex items-center justify-center transition-all duration-150 ease-unslop"
                     aria-label={isPlaying ? 'Pause video' : 'Play video'}
                     title={isPlaying ? 'Pause' : 'Play'}
                   >
@@ -102,7 +102,7 @@ export default function SpaceSingularity() {
                   <button
                     type="button"
                     onClick={toggleSound}
-                    className="w-8 h-8 rounded-lg bg-raised border border-hairline text-secondary hover:text-primary hover:border-hairline-strong flex items-center justify-center transition-colors duration-150 ease-unslop"
+                    className="w-8 h-8 rounded-lg bg-raised border border-hairline text-secondary hover:text-sky-300 hover:border-sky-500/50 hover:shadow-[0_0_12px_rgba(56,189,248,0.25)] flex items-center justify-center transition-all duration-150 ease-unslop"
                     aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
                     title={isMuted ? 'Unmute' : 'Mute'}
                   >
@@ -128,7 +128,7 @@ export default function SpaceSingularity() {
                 Building reliable software on top of probabilistic models means putting strict, testable boundaries around every unpredictable step.
               </p>
               <p>
-                Every vector query, async queue, and sandboxed process is instrumented for latency, memory ceilings, and clear failure modes—so whether matching market orders or synthesizing academic documents, the system behaves predictably under load.
+                Every vector query, async queue, and sandboxed process is instrumented for latency, memory ceilings, and clear failure modes — so whether matching market orders or synthesizing academic documents, the system behaves predictably under load.
               </p>
             </div>
 
@@ -136,13 +136,13 @@ export default function SpaceSingularity() {
               {PRINCIPLES.map((item) => (
                 <div
                   key={item.id}
-                  className="p-5 rounded-xl bg-surface border border-hairline flex items-start gap-4"
+                  className="p-5 rounded-xl bg-surface border border-hairline hover:border-sky-500/50 hover:shadow-[0_0_22px_rgba(56,189,248,0.18)] transition-all duration-150 flex items-start gap-4 group"
                 >
-                  <span className="font-mono text-xs text-muted tabular-nums mt-0.5 shrink-0">
+                  <span className="font-mono text-xs text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.4)] tabular-nums mt-0.5 shrink-0 group-hover:text-sky-300 transition-colors">
                     {item.id}
                   </span>
                   <div>
-                    <h3 className="text-[15px] font-medium text-primary">
+                    <h3 className="text-[15px] font-medium text-primary group-hover:text-sky-300 transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-sm text-secondary mt-1 leading-relaxed">

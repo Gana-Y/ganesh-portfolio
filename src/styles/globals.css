@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Satisfy&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,20 +7,23 @@
 :root {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-script: 'Dancing Script', 'Satisfy', cursive;
 
-  --bg-deep: #07080d;
-  --bg-canvas: #0b0d14;
-  --bg-surface: #11141c;
-  --bg-raised: #1a1e28;
+  --bg-deep: #04060c;
+  --bg-canvas: #070b14;
+  --bg-surface: #0d1322;
+  --bg-raised: #141c30;
 
-  --text-primary: #eef0f5;
-  --text-secondary: #a3a9b8;
-  --text-muted: #7a8296;
+  --text-primary: #eef3fb;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
 
-  --accent: #2dd4bf;
-  --live: #4cc38a;
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.45);
+  --live: #38bdf8;
   --danger: #e5484d;
-  --hairline: rgba(238, 240, 245, 0.08);
+  --hairline: rgba(56, 189, 248, 0.12);
+  --hairline-strong: rgba(56, 189, 248, 0.28);
 }
 
 * {
@@ -66,7 +69,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Quiet scrollbar */
+/* Quiet scrollbar with subtle blue hover */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -76,27 +79,45 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(238, 240, 245, 0.14);
+  background: rgba(56, 189, 248, 0.2);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(238, 240, 245, 0.24);
+  background: rgba(56, 189, 248, 0.45);
 }
 
 /* Selection */
 ::selection {
-  background: rgba(45, 212, 191, 0.22);
-  color: var(--text-primary);
+  background: rgba(56, 189, 248, 0.3);
+  color: #ffffff;
 }
 
 /* Keyboard focus ring */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+  box-shadow: 0 0 12px var(--accent-glow);
 }
 
-/* Subtle top edge highlight for dark raised controls (no glow) */
+/* Subtle top edge highlight for dark raised controls */
 .control-highlight {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Blue glow utilities */
+.glow-blue-sm {
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+}
+
+.glow-blue-md {
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.4);
+}
+
+.glow-blue-lg {
+  box-shadow: 0 0 36px rgba(56, 189, 248, 0.55);
+}
+
+.glow-blue-text {
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
 }
