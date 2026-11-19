@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: 'Ganesh Yandigeri',
     images: [
       {
-        url: '/images/profile.png',
+        url: '/images/portrait.png',
         width: 800,
         height: 800,
         alt: 'Ganesh Yandigeri',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     description:
       'Python and AI systems engineer building low-latency matching engines, cgroup code sandboxes, and multimodal RAG architectures.',
     creator: '@Ganesh821060',
-    images: ['/images/profile.png'],
+    images: ['/images/portrait.png'],
   },
   robots: {
     index: true,

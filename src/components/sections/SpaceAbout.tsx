@@ -62,7 +62,7 @@ export default function SpaceAbout() {
             <div className="rounded-2xl overflow-hidden border border-hairline bg-surface">
               <div className="relative w-full aspect-[4/5] bg-deep">
                 <img
-                  src="/images/profile.png"
+                  src="/images/portrait.png"
                   alt={PERSONAL_INFO.name}
                   className="w-full h-full object-cover object-top"
                   onError={(e) => {
