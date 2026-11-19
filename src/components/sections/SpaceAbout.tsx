@@ -36,6 +36,13 @@ const STATS = [
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+// Single combined gradient: bottom 2.5px is crisp glowing underline, top is translucent highlighter fill
+const HIGHLIGHT_GRADIENT =
+  'linear-gradient(to top, rgba(56, 189, 248, 0.95) 0px, rgba(56, 189, 248, 0.95) 2.5px, rgba(56, 189, 248, 0.18) 2.5px, rgba(14, 165, 233, 0.24) 100%)';
+
+const PROJECT_HIGHLIGHT_GRADIENT =
+  'linear-gradient(to top, rgba(56, 189, 248, 1) 0px, rgba(56, 189, 248, 1) 2px, rgba(56, 189, 248, 0.22) 2px, rgba(14, 165, 233, 0.28) 100%)';
+
 export default function SpaceAbout() {
   return (
     <section id="about" className="py-20 sm:py-24 bg-canvas border-t border-hairline">
@@ -92,63 +99,85 @@ export default function SpaceAbout() {
 
           <div className="lg:col-span-8 flex flex-col justify-between gap-8">
             <div className="space-y-5 text-[15px] leading-[1.75] text-secondary">
-              {/* Scroll-triggered highlighter sweep on identity sentence */}
-              <motion.p
-                initial={{ opacity: 0.9 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.4 }}
-                className="text-primary text-[15.5px]"
-              >
+              {/* Bio opening with synchronized highlighter + underline sweep */}
+              <div className="text-primary text-[15.5px]">
                 <motion.span
                   initial={{ backgroundSize: '0% 100%' }}
                   whileInView={{ backgroundSize: '100% 100%' }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                  className="rounded px-1.5 py-0.5 text-sky-100 font-medium border-b-2 border-sky-400/90 shadow-[0_0_15px_rgba(56,189,248,0.25)] bg-gradient-to-r from-sky-500/20 via-blue-500/25 to-sky-400/20 bg-no-repeat [background-position:0_100%] [box-decoration-break:clone] [-webkit-box-decoration-break:clone] inline leading-[1.85]"
+                  viewport={{ once: true, margin: '-20% 0px -20% 0px' }}
+                  transition={{ duration: 1.35, ease: [0.25, 1, 0.4, 1] }}
+                  style={{
+                    backgroundImage: HIGHLIGHT_GRADIENT,
+                    backgroundPosition: '0 100%',
+                    backgroundRepeat: 'no-repeat',
+                    WebkitBoxDecorationBreak: 'clone',
+                    boxDecorationBreak: 'clone',
+                  }}
+                  className="rounded-sm px-1 py-0.5 text-sky-100 font-medium inline leading-[1.9]"
                 >
                   I am Ganesh Yandigeri, a Python and AI systems engineer working at the intersection of low-latency backend architecture and retrieval-augmented language models.
                 </motion.span>
-              </motion.p>
+              </div>
 
               <p>
                 Production AI systems depend as much on storage, scheduling, and isolation as on the model itself. My work focuses on deterministic execution engines and fast retrieval pipelines that hold up under strict memory, latency, and security bounds.
               </p>
 
-              {/* Scroll-triggered highlights on flagship projects */}
-              <p>
+              {/* Flagship projects with synchronized highlighter + underline sweep */}
+              <div className="text-secondary leading-[1.8]">
                 Recent builds include{' '}
                 <motion.span
                   initial={{ backgroundSize: '0% 100%', color: 'inherit' }}
-                  whileInView={{ backgroundSize: '100% 100%', color: '#7dd3fc' }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: 0.5, ease: EASE }}
-                  className="font-semibold px-1.5 py-0.5 rounded bg-gradient-to-r from-sky-500/25 to-blue-500/25 border-b-2 border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)] bg-no-repeat [background-position:0_100%] inline-block transition-colors"
+                  whileInView={{ backgroundSize: '100% 100%', color: '#e0f2fe' }}
+                  viewport={{ once: true, margin: '-15% 0px -15% 0px' }}
+                  transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 1, 0.4, 1] }}
+                  style={{
+                    backgroundImage: PROJECT_HIGHLIGHT_GRADIENT,
+                    backgroundPosition: '0 100%',
+                    backgroundRepeat: 'no-repeat',
+                    WebkitBoxDecorationBreak: 'clone',
+                    boxDecorationBreak: 'clone',
+                  }}
+                  className="font-semibold px-1 py-0.5 rounded-sm inline-block transition-colors"
                 >
                   Florix AI
                 </motion.span>{' '}
                 (ChromaDB HNSW retrieval with Google Gemini across 15+ PostgreSQL tables),{' '}
                 <motion.span
                   initial={{ backgroundSize: '0% 100%', color: 'inherit' }}
-                  whileInView={{ backgroundSize: '100% 100%', color: '#7dd3fc' }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: 0.65, ease: EASE }}
-                  className="font-semibold px-1.5 py-0.5 rounded bg-gradient-to-r from-sky-500/25 to-blue-500/25 border-b-2 border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)] bg-no-repeat [background-position:0_100%] inline-block transition-colors"
+                  whileInView={{ backgroundSize: '100% 100%', color: '#e0f2fe' }}
+                  viewport={{ once: true, margin: '-15% 0px -15% 0px' }}
+                  transition={{ duration: 0.7, delay: 0.45, ease: [0.25, 1, 0.4, 1] }}
+                  style={{
+                    backgroundImage: PROJECT_HIGHLIGHT_GRADIENT,
+                    backgroundPosition: '0 100%',
+                    backgroundRepeat: 'no-repeat',
+                    WebkitBoxDecorationBreak: 'clone',
+                    boxDecorationBreak: 'clone',
+                  }}
+                  className="font-semibold px-1 py-0.5 rounded-sm inline-block transition-colors"
                 >
                   OrderCore
                 </motion.span>{' '}
                 (a heap-indexed limit order book sustaining 136,000 orders/sec at 4.3 µs median latency), and{' '}
                 <motion.span
                   initial={{ backgroundSize: '0% 100%', color: 'inherit' }}
-                  whileInView={{ backgroundSize: '100% 100%', color: '#7dd3fc' }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5, delay: 0.8, ease: EASE }}
-                  className="font-semibold px-1.5 py-0.5 rounded bg-gradient-to-r from-sky-500/25 to-blue-500/25 border-b-2 border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)] bg-no-repeat [background-position:0_100%] inline-block transition-colors"
+                  whileInView={{ backgroundSize: '100% 100%', color: '#e0f2fe' }}
+                  viewport={{ once: true, margin: '-15% 0px -15% 0px' }}
+                  transition={{ duration: 0.7, delay: 0.75, ease: [0.25, 1, 0.4, 1] }}
+                  style={{
+                    backgroundImage: PROJECT_HIGHLIGHT_GRADIENT,
+                    backgroundPosition: '0 100%',
+                    backgroundRepeat: 'no-repeat',
+                    WebkitBoxDecorationBreak: 'clone',
+                    boxDecorationBreak: 'clone',
+                  }}
+                  className="font-semibold px-1 py-0.5 rounded-sm inline-block transition-colors"
                 >
                   Vesper
                 </motion.span>{' '}
                 (a Docker and Linux cgroup sandbox arbitrating untrusted C++17, Python, and Java code).
-              </p>
+              </div>
             </div>
 
             {/* Four compact stat cards */}
